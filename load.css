@@ -1,0 +1,27 @@
+.loader, .load_new_news, .end {
+  text-align: center;
+  letter-spacing: 5px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  display: none;
+}
+
+.loader div, .load_new_news div {
+  display: inline-block;
+  width: 90px;
+  height: 90px;
+  border: solid 10px #ebebe0;
+  border-top: solid 10px #004d8d;
+  border-radius: 50%;
+  animation: loading 2s linear infinite;
+}
+
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+

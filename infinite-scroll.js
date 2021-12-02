@@ -1,0 +1,253 @@
+$(document).ready(function () {
+  const listNews = [
+    {
+      url: "tes.html",
+      breadcrumb: ["Home", "Teknologi", "Game"],
+      category: "Teknologi",
+      topics: [
+        "game",
+        "xbox",
+        "nintendo switch",
+        "ps 5",
+        "gta",
+        "gta Definitive Edition",
+      ],
+      title:
+        "GTA Trilogy: Definitive Edition Bikin Kecewa, Rockstar Minta Maaf dan Janjikan Ini",
+      subtitle: "",
+      author: "Muhammad Syahrul Ramadhan",
+      date: "28 November 2021 21:37",
+      imageAlt:
+        "GTA Trilogy bikin kecewa, Rockstar minta maaf(Foto: Gamesprout)",
+      imageSrc:
+        "https://cdn.medcom.id/dynamic/content/2021/11/21/1355398/KanAcN6iIO.jpg?w=1024",
+      listText: [
+        "Brenda never wanted to be famous. While most of her friends dreamed about being famous, she could see the negative aspects that those who wanted to be famous seemed to ignore. The fact that you could never do anything in public without being mobbed and the complete lack of privacy was something that she never wanted to experience. She also had no desire to have strangers speculating about every aspect of her life and what each thing she did was supposed to mean. Brenda was perfectly happy with her anonymous life where she could do exactly as she wanted without anyone else giving a damn. Thus, her overnight Internet celebrity was not something she was thrilled about as her friends told her how lucky she was. He scolded himself for being so tentative. He knew he shouldn't be so cautious, but there was a sixth sense telling him that things weren't exactly as they appeared. It was that weird chill that rolls up your neck and makes the hair stand on end. He knew that being so tentative could end up costing him the job, but he learned that listening to his sixth sense usually kept him from getting into a lot of trouble. They had no proof. He knew that they knew he had done it but they didn't have any proof. It was a huge distinction and it was the difference between him keeping his freedom or being locked away for decades. They continued to question him, probing him for information that they could use against him or find the proof they needed to put him away. He smiled and continued to block their every inquiry by feigning his innocence for a crime they all knew he committed.",
+        "It wasn't supposed to end that way. The plan had been meticulously thought out and practiced again and again. There was only one possible result once it had been implemented, but as they stood there the result wasn't anything close to what it should have been. They all blankly looked at each wondering how this could have happened. In their minds, they all began to blame the other members of the group as to why they had failed. Cake or pie? I can tell a lot about you by which one you pick. It may seem silly, but cake people and pie people are really different. I know which one I hope you are, but that's not for me to decide. So, what is it? Cake or pie?",
+        "At that moment, she realized that she had created her current life. It wasn't the life she wanted, but she took responsibility for how it currently stood. Something clicked and she saw that every choice she made to this point in her life had led to where her life stood at this very moment even if she knew this wasn't where she wanted to be. She determined to choose to change it.",
+        "Eating raw fish didn't sound like a good idea. 'It's a delicacy in Japan,' didn't seem to make it any more appetizing. Raw fish is raw fish, delicacy or not.It was that terrifying feeling you have as you tightly hold the covers over you with the knowledge that there is something hiding under your bed. You want to look, but you don't at the same time. You're frozen with fear and unable to act. That's where she found herself and she didn't know what to do next",
+        "Things aren't going well at all with mom today. She is just a limp noodle and wants to sleep all the time. I sure hope that things get better soon.",
+        "Peter always saw the world in black and white. There were two choices for every situation and you had to choose one of them. It was therefore terribly uncomfortable for him to spend time with Ashley. She saw the world in shades of gray with hundreds of choices to choose from in every situation.",
+      ],
+    },
+    {
+      url: "page2.html",
+      breadcrumb: ["Home", "Olahraga", "Liga Dunia"],
+      category: "Olahraga",
+      topics: ["Liga Prancis", "PSG"],
+      title: "PSG Tundukkan 10 Pemain Saint-Etienne",
+      subtitle: "Ligue 1",
+      author: "Gregorius Gelino",
+      date: "28 November 2021 21:37",
+      imageAlt:
+        "Penyerang PSG, Lionel Messi, mencoba melewati kawalan pemain Saint-Etienne (AFP/Jeff Pachoud)",
+      imageSrc:
+        "https://cdn.medcom.id/dynamic/content/2021/11/28/1358332/QRiCT4Vp8S.jpg?w=1024",
+      listText: [
+        "Jakarta: Film laga selalu memiliki keseruan tersendiri. Mulai dari aksi pertarungan sengit, ledakan dahsyat, hingga adegan demi adegan yang mendebarkan. Setiap plot mampu memberikan kejutan yang mampu membuat penonton sulit berpaling dari layar. Berikut ini lima rekomendasi tayangan laga yang seru, tayang di Netflix.",
+        "1. Red Notice Red Notice merupakan ajang bertemunya tiga bintang kelas dunia yang menunjukkan kebolehan aksi mereka. Disutradarai oleh Rawson Marshall Thurber, film ini menampilkan beragam aksi yang seru dan menantang, sisipan humor, serta interaksi yang menghibur di antara para karakternya. Dwayne Johnson berperan sebagai profiler FBI John Hartley yang terpaksa bekerja sama dengan penipu ulung Nolan Booth (Ryan Reynolds) demi meringkus buronan kelas kakap bernama The Bishop (Gal Gadot). Pengejaran ini pada akhirnya membawa mereka ke berbagai lokasi di dunia dalam petualangan yang mengasyikkan dan penuh kejutan.",
+        "2. My Name Tayangan ini memperlihatkan transformasi aktris populer Han So-hee dari peran-perannya di drama romantis Korea. Pada serial My Name, dia memerankan Jiwoo yang bertekad membalas dendam kematian ayahnya. Dia rela bergabung bersama organisasi kriminal dan menjadi mata-mata di dalam kepolisian. Serial ini menggabungkan berbagai genre seperti thriller, drama, misteri, dan laga, serial bergaya noir. Ada aksi pertarungan yang sengit seiring Jiwoo mengungkap pembunuh ayahnya.",
+        "3. The Harder They Fall Film laga ini menceritakan tentang penjahat bernama Nat Love (Jonathan Majors). Dia bertekad untuk melakukan balas dendam saat tahu musuh bebuyutannya, Rufus Buck (Idris Elba), telah keluar dari penjara. Bersama para anggota kelompoknya yang berkarakter unik, Nat berusaha melacak Rufus dan bersiap untuk menghadapi tim lawan yang sama kuatnya. Film ini memperlihatkan aksi koboi yang seru, sinematografi indah, dan musik yang menawan.",
+        "4. Arcane Arcane diangkat dari franchise League of Legends yang mendunia dan fenomenal. Serial animasi ini mengisahkan dua saudara yang berada di tengah perselisihan tajam antar sepasang kota kembar, Piltover dan Zaun. Kedua saudara ini pun bertempur sebagai musuh dalam perang antara teknologi sihir dan konflik keyakinan. Cerita mengenai sebuah dunia yang kompleks di Arcane ini dikemas dalam suguhan animasi yang indah dan menghanyutkan.",
+        "5. Money Heist Part 5: Volume 2 Salah satu serial terpopuler di dunia ini akan menghadirkan babak puncaknya pada tanggal 3 Desember mendatang. Pada volume terakhirnya, Profesor (Álvaro Morte) dan kawan-kawan harus berjuang untuk mengakhiri misi mereka di Bank Spanyol walau telah kehilangan salah satu anggota mereka.Kehadiran musuh pun membuat kelompok ini menyusun rencana agar bisa menyelundupkan emas curian mereka keluar. Di saat suasana semakin genting, sang Profesor justru membuat kesalahan terbesar dalam hidupnya.",
+      ],
+    },
+  ];
+
+  let articleParent = $(".mid_content .lc_col");
+  let articleText = document.querySelector(".article_ct .text");
+  let articleContainer = $(".article");
+  let currentNews = 0;
+  let currentPage = 1;
+  let totalPage = 5;
+  let newNews = false;
+
+  function loadFirstContent(countNews, textContainer, pageUrl) {
+    let text = document.createElement("p");
+    $(text).text(listNews[countNews].listText[0]);
+    textContainer.append(text);
+    text.style.marginBottom = "80px";
+    history.pushState(null, null, pageUrl);
+  }
+
+  function loadContent(currentNews, textContainer, pageUrl, page) {
+    if (page <= totalPage) {
+      $(".loader").css("display", "block");
+      let text = document.createElement("p");
+      text.innerText = listNews[currentNews].listText[page];
+      text.style.marginBottom = "80px";
+      textContainer.append(text);
+      currentPage < listNews;
+      history.pushState(null, null, `${pageUrl}?page=${page}`);
+    } else {
+      $(".loader").css("display", "none");
+    }
+  }
+
+  loadFirstContent(currentNews, articleText, listNews[currentNews].url);
+
+  $(window).scroll(function () {
+    if (
+      $(this).scrollTop() >
+      articleText.offsetHeight + articleText.offsetTop + 120
+    ) {
+      if (currentNews < listNews.length) {
+        loadContent(
+          currentNews,
+          articleText,
+          listNews[currentNews].url,
+          currentPage
+        );
+        currentPage++;
+      }
+    }
+
+    // LOAD MORE CONTENT
+    if (
+      $(this).scrollTop() + $(this).height() > $(document).height() - 10 &&
+      currentNews < listNews.length
+    ) {
+      currentNews++;
+
+      if (newNews === false) {
+        newNews = true;
+
+        let article = document.createElement("div");
+        article.classList.add("article");
+
+        // BREADCRUMB
+        let breadcrumb = document.createElement("div");
+        breadcrumb.classList.add("breadcrumb");
+        let listBreadcrumb = document.createElement("ul");
+
+        for (let i = 0; i < listNews[currentNews].breadcrumb.length; i++) {
+          let breadcrumbItem = document.createElement("li");
+          let breadcrumbLink = document.createElement("a");
+          breadcrumbLink.innerText = listNews[currentNews].breadcrumb[i];
+          breadcrumbLink.setAttribute("href", "");
+          breadcrumbItem.append(breadcrumbLink);
+          listBreadcrumb.append(breadcrumbItem);
+        }
+
+        breadcrumb.append(listBreadcrumb);
+        article.append(breadcrumb);
+
+        // SHOWING NEWS IMAGE AND IMAGE CAPTION
+        let newsImageFigure = document.createElement("div");
+        newsImageFigure.classList.add("pic");
+        let newsImage = document.createElement("img");
+        newsImage.setAttribute("src", listNews[currentNews].imageSrc);
+        newsImage.setAttribute("alt", listNews[currentNews].imageAlt);
+        let newsImageCaption = document.createElement("div");
+        newsImageCaption.classList.add("caption");
+        newsImageCaption.innerText = listNews[currentNews].imageAlt;
+
+        newsImageFigure.append(newsImage);
+        newsImageFigure.append(newsImageCaption);
+        article.append(newsImageFigure);
+
+        let contentContainer = document.createElement("div");
+        contentContainer.classList.add("article_ct");
+
+        //NEWS TITLE AND SUBTITLE
+        let newsTitle = document.createElement("h1");
+        newsTitle.innerText = listNews[currentNews].title;
+        let newsSubtitle = document.createElement("h4");
+        newsSubtitle.classList.add("subtitle");
+        newsSubtitle.innerText = listNews[currentNews].subtitle;
+        contentContainer.append(newsSubtitle);
+        contentContainer.append(newsTitle);
+        article.append(contentContainer);
+
+        let footArticle = document.createElement("div");
+        footArticle.classList.add("foot_article");
+
+        //SET CATEGORY
+        let category = document.createElement("a");
+        category.setAttribute("title", "liga prancis");
+        category.innerText = "Olahraga";
+        footArticle.append(category);
+        contentContainer.append(footArticle);
+
+        // SET TOPICS
+        for (let i = 0; i < listNews[currentNews].topics.length; i++) {
+          let topic = document.createElement("a");
+          let icon = document.createElement("i");
+          icon.classList.add("fa", "fa-folder");
+          topic.classList.add("topic");
+          topic.setAttribute("title", listNews[currentNews].topics[i]);
+          topic.append(icon);
+          topic.append(` ${listNews[currentNews].topics[i]}`);
+          //SET TOPICS LINK
+          topic.setAttribute("href", "");
+          footArticle.append(topic);
+        }
+
+        let info = document.createElement("div");
+        info.classList.add("info");
+
+        // CREATE AUTHOR & DATE
+        let info_ct = document.createElement("div");
+        info_ct.classList.add("info_ct");
+        info_ct.innerText = `${listNews[currentNews].author} • ${listNews[currentNews].date}`;
+        info.append(info_ct);
+        contentContainer.append(info);
+
+        // CLONE TOOL SECTION
+        let tool = document.querySelector(".tool_bt").cloneNode(true);
+        info.append(tool);
+
+        // TEXT CONTENT
+        let textContent = document.createElement("div");
+        textContent.classList.add("text");
+        textContent.setAttribute("id", "articleBody");
+        textContent.setAttribute("itemprop", "articleBody");
+        contentContainer.append(textContent);
+
+        //SOCMED BUTTON
+        let socmed = document.getElementById("stickshare");
+        contentContainer.append(socmed);
+
+        //BOTTOM ARTICLE
+        let bottomArticle = document.createElement("div");
+        bottomArticle.classList.add("bottom_article");
+        let listBottomArticle = document.createElement("ul");
+        let itemBottomArticle = document.createElement("li");
+        let linkBottomArticle = document.createElement("a");
+        linkBottomArticle.innerText = listNews[currentNews].breadcrumb[2];
+        linkBottomArticle.setAttribute(
+          "title",
+          listNews[currentNews].breadcrumb[2]
+        );
+        linkBottomArticle.setAttribute("href", "");
+
+        itemBottomArticle.append(linkBottomArticle);
+        listBottomArticle.append(itemBottomArticle);
+        bottomArticle.append(listBottomArticle);
+        contentContainer.append(bottomArticle);
+
+        loadFirstContent(currentNews, textContent, listNews[currentNews].url);
+
+        articleParent.append(article);
+          console.log(articleContainer.eq(currentNews - 1));
+        if (
+          $(this).scrollTop() >
+          articleContainer.eq(currentNews - 1).outerHeight() +
+            articleContainer.eq(currentNews - 1).offset().top +
+            120
+        ) {
+          
+          loadContent(
+            currentNews,
+            articleText,
+            listNews[currentNews].url,
+            currentPage
+          );
+          currentPage++;
+        }
+      } else {
+        newNews = false;
+      }
+    }
+  });
+});

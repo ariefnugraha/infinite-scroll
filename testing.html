@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="load.css">
+</head>
+
+<body style="font-size: 60px;">
+    <div class="news-content">
+
+    </div>
+    <div class="loader">
+        <div></div>
+        <p>LOADING</p>
+    </div>
+    <script>
+        function loadData(count) {
+            fetch('/index.json')
+                .then(res => res.json())
+                .then(json => {
+                    if (count < json.length) {
+                        let text = document.createElement('p');
+                        text.innerText = json[count].text;
+                        document.querySelector('.news-content').append(text);
+                        if (count > 0) {
+                            history.pushState(null, null, `/testing.html?page=${count}`)
+                        }
+                    }
+                });
+        }
+
+        let count = 0
+        window.addEventListener('load', loadData(count));
+
+        window.addEventListener('scroll', () => {
+            if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
+                count += 1;
+                loadData(count)
+            }
+        })
+    </script>
+</body>
+
+</html>

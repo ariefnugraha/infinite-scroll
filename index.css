@@ -1,0 +1,10 @@
+.loader {
+  height: 40px;
+  margin-top: 0;
+  text-align: center;
+  background: transparent url("loader.svg") no-repeat center center;
+  background-size: 40px 19px;
+  opacity: 0;
+  animation: flipAnimation 1s infinite;
+  transition: opacity 300ms;
+}
