@@ -83,6 +83,7 @@ $(document).ready(function () {
   loadFirstContent(currentNews, articleText, listNews[currentNews].url);
 
   $(window).scroll(function () {
+
     // LOAD PAGINASI DATA
     if (
       $(this).scrollTop() >
@@ -115,7 +116,6 @@ $(document).ready(function () {
       currentNews++;
 
       if (currentNews < listNews.length) {
-        history.pushState(null, null, listNews[currentNews].url);
         document.title = listNews[currentNews].title;
 
         let article = document.createElement("div");
@@ -220,7 +220,7 @@ $(document).ready(function () {
 
         loader.append(loadImage);
         loader.append(loadingText);
-        contentContainer.append(loader)
+        
         //SOCMED BUTTON
         let socmed = document.getElementById("stickshare");
         contentContainer.append(socmed);
@@ -247,18 +247,21 @@ $(document).ready(function () {
 
         loadFirstContent(currentNews, textContent, listNews[currentNews].url);
 
-        if (
-          $(".article").eq(currentNews).find(".article_ct .text p").length > 0
-        ) {
-          console.log("tes");
-          loadContent(
-            currentNews,
-            articleText,
-            listNews[currentNews].url,
-            currentPage,
-            listNews[currentNews].listText.length
-          );
+        if($('.article').eq(currentNews).find('.article_ct .text p').length > 0) {
+          textContent.append(loader);
         }
+        // if (
+        //   $(".article").eq(currentNews).find(".article_ct .text p").length > 0
+        // ) {
+        //   console.log("tes");
+        //   loadContent(
+        //     currentNews,
+        //     articleText,
+        //     listNews[currentNews].url,
+        //     currentPage,
+        //     listNews[currentNews].listText.length
+        //   );
+        // }
       }
     }
   });
