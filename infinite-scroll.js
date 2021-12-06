@@ -74,9 +74,7 @@ $(document).ready(function () {
     text.innerText = listNews[currentNews].listText[page];
     text.style.marginBottom = "80px";
     textContainer.append(text);
-    currentPage < listNews;
     history.pushState(null, null, `${pageUrl}?page=${page}`);
-
     if (page === totalPage - 1) {
       $(".loader").css("display", "none");
     }
@@ -102,8 +100,8 @@ $(document).ready(function () {
         );
         currentPage++;
 
-        if (currentPage < listNews[currentNews].listText.length) {
-          nextPage = false;
+        if (currentPage === listNews[currentNews].listText.length) {
+          nextPage = true;
         }
       }
     }
@@ -114,10 +112,9 @@ $(document).ready(function () {
       currentNews < listNews.length
     ) {
       currentPage = 0;
-      nextPage = true;
       currentNews++;
+
       if (currentNews < listNews.length) {
-        console.log(currentNews);
         history.pushState(null, null, listNews[currentNews].url);
         document.title = listNews[currentNews].title;
 
@@ -209,10 +206,21 @@ $(document).ready(function () {
         // TEXT CONTENT
         let textContent = document.createElement("div");
         textContent.classList.add("text");
+
         textContent.setAttribute("id", "articleBody");
         textContent.setAttribute("itemprop", "articleBody");
         contentContainer.append(textContent);
 
+        // CREATE LOADER ANIMATION
+        let loader = document.createElement("div");
+        let loadImage = document.createElement("div");
+        let loadingText = document.createElement("p");
+        loadingText.innerText = "LOADING";
+        loader.classList.add("loader");
+
+        loader.append(loadImage);
+        loader.append(loadingText);
+        contentContainer.append(loader)
         //SOCMED BUTTON
         let socmed = document.getElementById("stickshare");
         contentContainer.append(socmed);
@@ -235,9 +243,22 @@ $(document).ready(function () {
         bottomArticle.append(listBottomArticle);
         contentContainer.append(bottomArticle);
 
+        articleParent.append(article);
+
         loadFirstContent(currentNews, textContent, listNews[currentNews].url);
 
-        articleParent.append(article);
+        if (
+          $(".article").eq(currentNews).find(".article_ct .text p").length > 0
+        ) {
+          console.log("tes");
+          loadContent(
+            currentNews,
+            articleText,
+            listNews[currentNews].url,
+            currentPage,
+            listNews[currentNews].listText.length
+          );
+        }
       }
     }
   });
