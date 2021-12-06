@@ -1,7 +1,7 @@
 $(document).ready(function () {
   const listNews = [
     {
-      url: "tes.html",
+      url: "index.html",
       breadcrumb: ["Home", "Teknologi", "Game"],
       category: "Teknologi",
       topics: [
