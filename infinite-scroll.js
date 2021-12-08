@@ -32,24 +32,23 @@ $(document).ready(function () {
     },
     {
       url: "page2.html",
-      breadcrumb: ["Home", "Olahraga", "Liga Dunia"],
-      category: "Olahraga",
-      topics: ["Liga Prancis", "PSG"],
-      title: "PSG Tundukkan 10 Pemain Saint-Etienne",
-      subtitle: "Ligue 1",
-      author: "Gregorius Gelino",
-      date: "28 November 2021 21:37",
-      imageAlt:
-        "Penyerang PSG, Lionel Messi, mencoba melewati kawalan pemain Saint-Etienne (AFP/Jeff Pachoud)",
+      breadcrumb: ["Home", "Hiburan", "Selebritas"],
+      category: "Hiburan",
+      topics: ["rekomendasi film", "trivia film", "film netflix"],
+      title: "5 Film dan Drama Mengharukan tentang Keluarga",
+      subtitle: "",
+      author: "Sunnaholomi Halakrispen",
+      date: "26 Juni 2021 09:00",
+      imageAlt: "Film Ali & Ratu Ratu Queens (Foto: dok. netflix)",
       imageSrc:
-        "https://cdn.medcom.id/dynamic/content/2021/11/28/1358332/QRiCT4Vp8S.jpg?w=1024",
+        "https://cdn.medcom.id/dynamic/content/2021/06/25/1292679/XQvScZ5hpN.jpeg?w=1024",
       listText: [
-        "Jakarta: Film laga selalu memiliki keseruan tersendiri. Mulai dari aksi pertarungan sengit, ledakan dahsyat, hingga adegan demi adegan yang mendebarkan. Setiap plot mampu memberikan kejutan yang mampu membuat penonton sulit berpaling dari layar. Berikut ini lima rekomendasi tayangan laga yang seru, tayang di Netflix.",
-        "1. Red Notice Red Notice merupakan ajang bertemunya tiga bintang kelas dunia yang menunjukkan kebolehan aksi mereka. Disutradarai oleh Rawson Marshall Thurber, film ini menampilkan beragam aksi yang seru dan menantang, sisipan humor, serta interaksi yang menghibur di antara para karakternya. Dwayne Johnson berperan sebagai profiler FBI John Hartley yang terpaksa bekerja sama dengan penipu ulung Nolan Booth (Ryan Reynolds) demi meringkus buronan kelas kakap bernama The Bishop (Gal Gadot). Pengejaran ini pada akhirnya membawa mereka ke berbagai lokasi di dunia dalam petualangan yang mengasyikkan dan penuh kejutan.",
-        "2. My Name Tayangan ini memperlihatkan transformasi aktris populer Han So-hee dari peran-perannya di drama romantis Korea. Pada serial My Name, dia memerankan Jiwoo yang bertekad membalas dendam kematian ayahnya. Dia rela bergabung bersama organisasi kriminal dan menjadi mata-mata di dalam kepolisian. Serial ini menggabungkan berbagai genre seperti thriller, drama, misteri, dan laga, serial bergaya noir. Ada aksi pertarungan yang sengit seiring Jiwoo mengungkap pembunuh ayahnya.",
-        "3. The Harder They Fall Film laga ini menceritakan tentang penjahat bernama Nat Love (Jonathan Majors). Dia bertekad untuk melakukan balas dendam saat tahu musuh bebuyutannya, Rufus Buck (Idris Elba), telah keluar dari penjara. Bersama para anggota kelompoknya yang berkarakter unik, Nat berusaha melacak Rufus dan bersiap untuk menghadapi tim lawan yang sama kuatnya. Film ini memperlihatkan aksi koboi yang seru, sinematografi indah, dan musik yang menawan.",
-        "4. Arcane Arcane diangkat dari franchise League of Legends yang mendunia dan fenomenal. Serial animasi ini mengisahkan dua saudara yang berada di tengah perselisihan tajam antar sepasang kota kembar, Piltover dan Zaun. Kedua saudara ini pun bertempur sebagai musuh dalam perang antara teknologi sihir dan konflik keyakinan. Cerita mengenai sebuah dunia yang kompleks di Arcane ini dikemas dalam suguhan animasi yang indah dan menghanyutkan.",
-        "5. Money Heist Part 5: Volume 2 Salah satu serial terpopuler di dunia ini akan menghadirkan babak puncaknya pada tanggal 3 Desember mendatang. Pada volume terakhirnya, Profesor (Álvaro Morte) dan kawan-kawan harus berjuang untuk mengakhiri misi mereka di Bank Spanyol walau telah kehilangan salah satu anggota mereka.Kehadiran musuh pun membuat kelompok ini menyusun rencana agar bisa menyelundupkan emas curian mereka keluar. Di saat suasana semakin genting, sang Profesor justru membuat kesalahan terbesar dalam hidupnya.",
+        "Jakarta: Salah satu cara asyik menikmati waktu akhir pekan ialah dengan menonton film atau tayangan menarik. Jika Anda mengalami hari yang cukup berat dan ingin meluapkan emosi, coba saksikan beberapa tayangan di Netflix yang mampu menguras emosi.Berikut ini film dan drama bertema keluarga. Kisah yang ditayangkan tidak hanya akan menyentuh hati, namun juga membuat Anda lebih menghargai keluarga.",
+        "1. Ali & Ratu Ratu Queens Film Netflix terbaru dari Indonesia Ali & Ratu Ratu Queens mengangkat kisah seorang anak laki-laki bernama Ali (diperankan Iqbaal Ramadhan). Ia pergi ke New York untuk mencari ibunya yang lama hidup terpisah. Sesampainya di sana, ia bertemu dengan empat wanita imigran Indonesia yang baik hati dan menyenangkan. Perjalanan Ali bersama Ratu Ratu pun menuntunnya pada sebuah pemahaman bahwa ada banyak cara untuk mendefinisikan arti keluarga. Dengan kehangatan cerita serta keindahan musik dan sinematografinya, Ali & Ratu Ratu Queens siap membuat Anda dipenuhi oleh berbagai macam emosi.",
+        "2. Fatherhood Film terbaru Kevin Hart Fatherhood juga mampu menguras emosi dan air mata. Film ini mengisahkan Matthew Logelin, seorang single father yang harus membesarkan bayi perempuannya sendirian setelah kehilangan sang istri. Meskipun banyak menghadapi tantangan, Matthew tetap bertekad memberikan yang terbaik kepada putri satu-satunya. Diangkat dari kisah nyata, Fatherhood mengombinasikan unsur haru dengan komedi yang akan memecah tawa Anda saat mengikuti jalan ceritanya.",
+        "3. Move To Heaven Serial Korea Move to Heaven berhasil mencuri perhatian lewat konsep ceritanya yang tak biasa. Drama ini menceritakan tentang seorang penghapus trauma dengan Sindrom Asperger bernama Han Geu-ru (diperankan Tang Jun-sang) dan pamannya yang seorang mantan narapidana Cho Sang-gu (diperankan Lee Je-hoon). Drama Korea ini membawa beragam kisah yang akan membuat Anda meneteskan air mata di setiap episodenya. Dinamika hubungan Geu-ru dan Sang-gu pun menjadi daya tarik utama di Move to Heaven. Meskipun awalnya kesulitan beradaptasi dengan satu sama lain, keduanya mampu mengesampingkan perbedaan yang ada. Mereka akhirnya sukses bekerja sama untuk menyampaikan pesan terakhir orang yang telah tiada kepada mereka yang dicintai.",
+        "4. June & Kopi Siapa bilang hewan peliharaan tidak bisa menjadi keluarga kita? June & Kopi membuktikan hal ini lewat kisahnya yang menggemaskan sekaligus mengharukan mengenai persahabatan antara anjing dan manusia. Film ini dibintangi oleh Acha Septriasa, Ryan Delon, dan aktris cilik berbakat Makayla Rose Hilli. Film June & Kopi menceritakan seekor anjing jalanan bernama June yang diselamatkan oleh sepasang suami-istri. Seiring dengan kehidupan barunya, June pun akhirnya belajar untuk mempercayai serta menerima keluarga barunya. Sebuah tayangan mengenai keluarga yang sarat makna, June & Kopi juga mengajak kita untuk lebih menghargai hewan peliharaan kita.",
+        "5. Hi Bye, Mama! Hi Bye, Mama! merupakan drama Korea yang akan membuat Anda berurai air mata. Serial ini menceritakan tentang Cha Yu-ri (diperankan Kim Tae-hee), hantu wanita yang mendapat kesempatan kedua untuk kembali hidup selama 49 hari. Dia pun harus mencoba menemukan tempatnya kembali di kehidupan baru anak dan suaminya yang kini telah menikah lagi. Hi Bye, Mama! menyuguhkan perjuangan dan penyesalan dari mereka yang telah meninggal dan ditinggalkan. Drama ini akan menghanyutkan Anda dengan pesan-pesannya yang berharga mengenai keluarga.",
       ],
     },
   ];
@@ -59,6 +58,7 @@ $(document).ready(function () {
   let currentNews = 0;
   let currentPage = 1;
   let nextPage = false;
+  let outerHeightValue = 0;
 
   function loadFirstContent(countNews, textContainer, pageUrl) {
     let text = document.createElement("p");
@@ -66,6 +66,7 @@ $(document).ready(function () {
     textContainer.append(text);
     text.style.marginBottom = "80px";
     history.pushState(null, null, pageUrl);
+    return console.log("value count news " + countNews);
   }
 
   function loadContent(currentNews, textContainer, pageUrl, page, totalPage) {
@@ -74,7 +75,7 @@ $(document).ready(function () {
     text.innerText = listNews[currentNews].listText[page];
     text.style.marginBottom = "80px";
     textContainer.append(text);
-    history.pushState(null, null, `${pageUrl}?page=${page}`);
+    history.pushState(null, null, `${pageUrl}?page=${page + 1}`);
     if (page === totalPage - 1) {
       $(".loader").css("display", "none");
     }
@@ -82,8 +83,8 @@ $(document).ready(function () {
 
   loadFirstContent(currentNews, articleText, listNews[currentNews].url);
 
+  
   $(window).scroll(function () {
-
     // LOAD PAGINASI DATA
     if (
       $(this).scrollTop() >
@@ -99,6 +100,7 @@ $(document).ready(function () {
           currentPage,
           listNews[currentNews].listText.length
         );
+        
         currentPage++;
 
         if (currentPage === listNews[currentNews].listText.length) {
@@ -108,161 +110,166 @@ $(document).ready(function () {
     }
 
     // LOAD BERITA BARU APABILA SUDAH SCROLL SAMPAI PALING BAWAH
-    if (
-      $(this).scrollTop() + $(this).height() > $(document).height() - 10 &&
-      currentNews < listNews.length
-    ) {
-      currentPage = 0;
-      currentNews++;
+    // if (
+    //   $(this).scrollTop() + $(this).height() > $(document).height() - 10 &&
+    //   currentNews < listNews.length
+    // ) {
+    //   $("load_new_news").css("display", "block");
+    //   currentPage = 1;
+    //   currentNews++;
 
-      if (currentNews < listNews.length) {
-        document.title = listNews[currentNews].title;
+    //   if (currentNews < listNews.length) {
+    //     $("load_new_news").css("display", "none");
+    //     document.title = listNews[currentNews].title;
 
-        let article = document.createElement("div");
-        article.classList.add("article");
+    //     let article = document.createElement("div");
+    //     article.classList.add("article");
 
-        // BREADCRUMB
-        let breadcrumb = document.createElement("div");
-        breadcrumb.classList.add("breadcrumb");
-        let listBreadcrumb = document.createElement("ul");
+    //     // BREADCRUMB
+    //     let breadcrumb = document.createElement("div");
+    //     breadcrumb.classList.add("breadcrumb");
+    //     let listBreadcrumb = document.createElement("ul");
 
-        for (let i = 0; i < listNews[currentNews].breadcrumb.length; i++) {
-          let breadcrumbItem = document.createElement("li");
-          let breadcrumbLink = document.createElement("a");
-          breadcrumbLink.innerText = listNews[currentNews].breadcrumb[i];
-          breadcrumbLink.setAttribute("href", "");
-          breadcrumbItem.append(breadcrumbLink);
-          listBreadcrumb.append(breadcrumbItem);
-        }
+    //     for (let i = 0; i < listNews[currentNews].breadcrumb.length; i++) {
+    //       let breadcrumbItem = document.createElement("li");
+    //       let breadcrumbLink = document.createElement("a");
+    //       breadcrumbLink.innerText = listNews[currentNews].breadcrumb[i];
+    //       breadcrumbLink.setAttribute("href", "");
+    //       breadcrumbItem.append(breadcrumbLink);
+    //       listBreadcrumb.append(breadcrumbItem);
+    //     }
 
-        breadcrumb.append(listBreadcrumb);
-        article.append(breadcrumb);
+    //     breadcrumb.append(listBreadcrumb);
+    //     article.append(breadcrumb);
 
-        // SHOWING NEWS IMAGE AND IMAGE CAPTION
-        let newsImageFigure = document.createElement("div");
-        newsImageFigure.classList.add("pic");
-        let newsImage = document.createElement("img");
-        newsImage.setAttribute("src", listNews[currentNews].imageSrc);
-        newsImage.setAttribute("alt", listNews[currentNews].imageAlt);
-        let newsImageCaption = document.createElement("div");
-        newsImageCaption.classList.add("caption");
-        newsImageCaption.innerText = listNews[currentNews].imageAlt;
+    //     // SHOWING NEWS IMAGE AND IMAGE CAPTION
+    //     let newsImageFigure = document.createElement("div");
+    //     newsImageFigure.classList.add("pic");
+    //     let newsImage = document.createElement("img");
+    //     newsImage.setAttribute("src", listNews[currentNews].imageSrc);
+    //     newsImage.setAttribute("alt", listNews[currentNews].imageAlt);
+    //     let newsImageCaption = document.createElement("div");
+    //     newsImageCaption.classList.add("caption");
+    //     newsImageCaption.innerText = listNews[currentNews].imageAlt;
 
-        newsImageFigure.append(newsImage);
-        newsImageFigure.append(newsImageCaption);
-        article.append(newsImageFigure);
+    //     newsImageFigure.append(newsImage);
+    //     newsImageFigure.append(newsImageCaption);
+    //     article.append(newsImageFigure);
 
-        let contentContainer = document.createElement("div");
-        contentContainer.classList.add("article_ct");
+    //     let contentContainer = document.createElement("div");
+    //     contentContainer.classList.add("article_ct");
 
-        //NEWS TITLE AND SUBTITLE
-        let newsTitle = document.createElement("h1");
-        newsTitle.innerText = listNews[currentNews].title;
-        let newsSubtitle = document.createElement("h4");
-        newsSubtitle.classList.add("subtitle");
-        newsSubtitle.innerText = listNews[currentNews].subtitle;
-        contentContainer.append(newsSubtitle);
-        contentContainer.append(newsTitle);
-        article.append(contentContainer);
+    //     //NEWS TITLE AND SUBTITLE
+    //     let newsTitle = document.createElement("h1");
+    //     newsTitle.innerText = listNews[currentNews].title;
+    //     let newsSubtitle = document.createElement("h4");
+    //     newsSubtitle.classList.add("subtitle");
+    //     newsSubtitle.innerText = listNews[currentNews].subtitle;
+    //     contentContainer.append(newsSubtitle);
+    //     contentContainer.append(newsTitle);
+    //     article.append(contentContainer);
 
-        let footArticle = document.createElement("div");
-        footArticle.classList.add("foot_article");
+    //     let footArticle = document.createElement("div");
+    //     footArticle.classList.add("foot_article");
 
-        //SET CATEGORY
-        let category = document.createElement("a");
-        category.setAttribute("title", "liga prancis");
-        category.innerText = "Olahraga";
-        footArticle.append(category);
-        contentContainer.append(footArticle);
+    //     //SET CATEGORY
+    //     let category = document.createElement("a");
+    //     category.setAttribute("title", "liga prancis");
+    //     category.innerText = "Olahraga";
+    //     footArticle.append(category);
+    //     contentContainer.append(footArticle);
 
-        // SET TOPICS
-        for (let i = 0; i < listNews[currentNews].topics.length; i++) {
-          let topic = document.createElement("a");
-          let icon = document.createElement("i");
-          icon.classList.add("fa", "fa-folder");
-          topic.classList.add("topic");
-          topic.setAttribute("title", listNews[currentNews].topics[i]);
-          topic.append(icon);
-          topic.append(` ${listNews[currentNews].topics[i]}`);
-          //SET TOPICS LINK
-          topic.setAttribute("href", "");
-          footArticle.append(topic);
-        }
+    //     // SET TOPICS
+    //     for (let i = 0; i < listNews[currentNews].topics.length; i++) {
+    //       let topic = document.createElement("a");
+    //       let icon = document.createElement("i");
+    //       icon.classList.add("fa", "fa-folder");
+    //       topic.classList.add("topic");
+    //       topic.setAttribute("title", listNews[currentNews].topics[i]);
+    //       topic.append(icon);
+    //       topic.append(` ${listNews[currentNews].topics[i]}`);
+    //       //SET TOPICS LINK
+    //       topic.setAttribute("href", "");
+    //       footArticle.append(topic);
+    //     }
 
-        let info = document.createElement("div");
-        info.classList.add("info");
+    //     let info = document.createElement("div");
+    //     info.classList.add("info");
 
-        // CREATE AUTHOR & DATE
-        let info_ct = document.createElement("div");
-        info_ct.classList.add("info_ct");
-        info_ct.innerText = `${listNews[currentNews].author} • ${listNews[currentNews].date}`;
-        info.append(info_ct);
-        contentContainer.append(info);
+    //     // CREATE AUTHOR & DATE
+    //     let info_ct = document.createElement("div");
+    //     info_ct.classList.add("info_ct");
+    //     info_ct.innerText = `${listNews[currentNews].author} • ${listNews[currentNews].date}`;
+    //     info.append(info_ct);
+    //     contentContainer.append(info);
 
-        // CLONE TOOL SECTION
-        let tool = document.querySelector(".tool_bt").cloneNode(true);
-        info.append(tool);
+    //     // CLONE TOOL SECTION
+    //     let tool = document.querySelector(".tool_bt").cloneNode(true);
+    //     info.append(tool);
 
-        // TEXT CONTENT
-        let textContent = document.createElement("div");
-        textContent.classList.add("text");
+    //     // TEXT CONTENT
+    //     let textContent = document.createElement("div");
+    //     textContent.classList.add("text");
 
-        textContent.setAttribute("id", "articleBody");
-        textContent.setAttribute("itemprop", "articleBody");
-        contentContainer.append(textContent);
+    //     textContent.setAttribute("id", "articleBody");
+    //     textContent.setAttribute("itemprop", "articleBody");
+    //     contentContainer.append(textContent);
 
-        // CREATE LOADER ANIMATION
-        let loader = document.createElement("div");
-        let loadImage = document.createElement("div");
-        let loadingText = document.createElement("p");
-        loadingText.innerText = "LOADING";
-        loader.classList.add("loader");
+    //     // CREATE LOADER ANIMATION
+    //     // let loader = document.createElement("div");
+    //     // let loadImage = document.createElement("div");
+    //     // let loadingText = document.createElement("p");
+    //     // loadingText.innerText = "LOADING";
+    //     // loader.classList.add("loader");
 
-        loader.append(loadImage);
-        loader.append(loadingText);
-        
-        //SOCMED BUTTON
-        let socmed = document.getElementById("stickshare");
-        contentContainer.append(socmed);
+    //     // loader.append(loadImage);
+    //     // loader.append(loadingText);
 
-        //BOTTOM ARTICLE
-        let bottomArticle = document.createElement("div");
-        bottomArticle.classList.add("bottom_article");
-        let listBottomArticle = document.createElement("ul");
-        let itemBottomArticle = document.createElement("li");
-        let linkBottomArticle = document.createElement("a");
-        linkBottomArticle.innerText = listNews[currentNews].breadcrumb[2];
-        linkBottomArticle.setAttribute(
-          "title",
-          listNews[currentNews].breadcrumb[2]
-        );
-        linkBottomArticle.setAttribute("href", "");
+    //     //SOCMED BUTTON
+    //     let socmed = document.getElementById("stickshare");
+    //     contentContainer.append(socmed);
 
-        itemBottomArticle.append(linkBottomArticle);
-        listBottomArticle.append(itemBottomArticle);
-        bottomArticle.append(listBottomArticle);
-        contentContainer.append(bottomArticle);
+    //     //BOTTOM ARTICLE
+    //     let bottomArticle = document.createElement("div");
+    //     bottomArticle.classList.add("bottom_article");
+    //     let listBottomArticle = document.createElement("ul");
+    //     let itemBottomArticle = document.createElement("li");
+    //     let linkBottomArticle = document.createElement("a");
+    //     linkBottomArticle.innerText = listNews[currentNews].breadcrumb[2];
+    //     linkBottomArticle.setAttribute(
+    //       "title",
+    //       listNews[currentNews].breadcrumb[2]
+    //     );
+    //     linkBottomArticle.setAttribute("href", "");
 
-        articleParent.append(article);
+    //     itemBottomArticle.append(linkBottomArticle);
+    //     listBottomArticle.append(itemBottomArticle);
+    //     bottomArticle.append(listBottomArticle);
+    //     contentContainer.append(bottomArticle);
 
-        loadFirstContent(currentNews, textContent, listNews[currentNews].url);
+    //     articleParent.append(article);
 
-        if($('.article').eq(currentNews).find('.article_ct .text p').length > 0) {
-          textContent.append(loader);
-        }
-        // if (
-        //   $(".article").eq(currentNews).find(".article_ct .text p").length > 0
-        // ) {
-        //   console.log("tes");
-        //   loadContent(
-        //     currentNews,
-        //     articleText,
-        //     listNews[currentNews].url,
-        //     currentPage,
-        //     listNews[currentNews].listText.length
-        //   );
-        // }
-      }
-    }
+    //     loadFirstContent(currentNews, textContent, listNews[currentNews].url);
+
+    //     if (
+    //       $(this).scrollTop() >
+    //         $(".article")
+    //           .eq(currentNews)
+    //           .find(".article_ct .text")
+    //           .outerHeight() +
+    //           200 &&
+    //       currentPage < listNews[currentNews].listText.length
+    //     ) {
+    //       loadContent(
+    //         currentNews,
+    //         $(".article").find(".article_ct .text"),
+    //         listNews[currentNews].url,
+    //         currentPage,
+    //         listNews[currentNews].listText.length
+    //       );
+    //       currentPage++;
+    //     }
+    //   }
+    // }
   });
 });
