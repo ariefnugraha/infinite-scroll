@@ -57,22 +57,23 @@ $(document).ready(function () {
   let articleText = document.querySelector(".article_ct .text");
   let currentNews = 0;
   let currentPage = 1;
-  let nextPage = false;
-  let outerHeightValue = 0;
+  let flag = false;
+  let lastScrollPos = 0;
 
   function loadFirstContent(countNews, textContainer, pageUrl) {
     let text = document.createElement("p");
     $(text).text(listNews[countNews].listText[0]);
     textContainer.append(text);
+    text.classList.add("split-page");
     text.style.marginBottom = "80px";
     history.pushState(null, null, pageUrl);
-    return console.log("value count news " + countNews);
   }
 
   function loadContent(currentNews, textContainer, pageUrl, page, totalPage) {
     $(".loader").css("display", "block");
     let text = document.createElement("p");
     text.innerText = listNews[currentNews].listText[page];
+    text.classList.add("split-page");
     text.style.marginBottom = "80px";
     textContainer.append(text);
     history.pushState(null, null, `${pageUrl}?page=${page + 1}`);
@@ -83,193 +84,265 @@ $(document).ready(function () {
 
   loadFirstContent(currentNews, articleText, listNews[currentNews].url);
 
-  
-  $(window).scroll(function () {
-    // LOAD PAGINASI DATA
-    if (
-      $(this).scrollTop() >
-        $(".article").eq(currentNews).find(".article_ct .text").outerHeight() +
-          200 &&
-      currentPage < listNews[currentNews].listText.length
-    ) {
-      if (nextPage === false) {
-        loadContent(
-          currentNews,
-          articleText,
-          listNews[currentNews].url,
-          currentPage,
-          listNews[currentNews].listText.length
-        );
-        
-        currentPage++;
+  $(window).scroll(function () {  
+    if(currentNews > 0) {
+      console.log(document.querySelectorAll('.article')[currentNews - 1].querySelector('.article_ct .text').getBoundingClientRect().bottom)
+    }
+    
+    if(lastScrollPos< $(this).scrollTop() && currentNews > 0 && document.querySelectorAll('.article')[currentNews - 1].querySelector('.article_ct .text').getBoundingClientRect().bottom === 0) {
+      history.pushState(null, null, listNews[currentNews - 1].url);
+      console.log('masuk')
+    } else {
+     console.log('gamasuk')
+    }
 
-        if (currentPage === listNews[currentNews].listText.length) {
-          nextPage = true;
+    lastScrollPos = $(this).scrollTop();
+
+
+    if (currentNews < listNews.length) {
+      
+      // LOAD PAGINASI DATA
+
+      // console.log(
+      //   "ARTIKEL POSITION: " + $(".article").eq(currentNews).position().top
+      // );
+      // console.log("SCROLL TOP: " + $(this).scrollTop());
+      // console.log(
+      //   "OFFSET HEIGHT: " +
+      //     $(".article")
+      //       .eq(currentNews)
+      //       .find(".article_ct .text")
+      //       .outerHeight() +
+      //     200
+      // );
+      // console.log("CURRENT PAGE: " + currentPage);
+      // console.log("LENGTH PAGE: " + listNews[currentNews].listText.length);
+
+
+      if (
+        $(this).scrollTop() > $(".article").eq(currentNews).position().top &&
+        $(this).scrollTop() >
+          $(".article")
+            .eq(currentNews)
+            .find(".article_ct .text")
+            .outerHeight() +
+            200 &&
+        currentPage < listNews[currentNews].listText.length
+      ) {
+        if (flag === false) {
+          loadContent(
+            currentNews,
+            articleText,
+            listNews[currentNews].url,
+            currentPage,
+            listNews[currentNews].listText.length
+          );
+          currentPage++;
+          if (currentPage === listNews[currentNews].listText.length) {
+            flag = true;
+          }
+        }
+      }
+
+      // LOAD BERITA BARU APABILA SUDAH SCROLL SAMPAI PALING BAWAH
+      if (
+        $(this).scrollTop() + $(this).height() > $(document).height() - 10 &&
+        currentNews < listNews.length - 1
+      ) {
+        console.log("current news amount: " + currentNews);
+        console.log("length current news: " + listNews.length);
+
+        $("load_new_news").css("display", "block");
+        currentPage = 1;
+        currentNews++;
+
+        $("load_new_news").css("display", "none");
+        document.title = listNews[currentNews].title;
+
+        let article = document.createElement("div");
+        article.classList.add("article");
+
+        // BREADCRUMB
+        let breadcrumb = document.createElement("div");
+        breadcrumb.classList.add("breadcrumb");
+        let listBreadcrumb = document.createElement("ul");
+
+        for (let i = 0; i < listNews[currentNews].breadcrumb.length; i++) {
+          let breadcrumbItem = document.createElement("li");
+          let breadcrumbLink = document.createElement("a");
+          breadcrumbLink.innerText = listNews[currentNews].breadcrumb[i];
+          breadcrumbLink.setAttribute("href", "");
+          breadcrumbItem.append(breadcrumbLink);
+          listBreadcrumb.append(breadcrumbItem);
+        }
+
+        breadcrumb.append(listBreadcrumb);
+        article.append(breadcrumb);
+
+        // SHOWING NEWS IMAGE AND IMAGE CAPTION
+        let newsImageFigure = document.createElement("div");
+        newsImageFigure.classList.add("pic");
+        let newsImage = document.createElement("img");
+        newsImage.setAttribute("src", listNews[currentNews].imageSrc);
+        newsImage.setAttribute("alt", listNews[currentNews].imageAlt);
+        let newsImageCaption = document.createElement("div");
+        newsImageCaption.classList.add("caption");
+        newsImageCaption.innerText = listNews[currentNews].imageAlt;
+
+        newsImageFigure.append(newsImage);
+        newsImageFigure.append(newsImageCaption);
+        article.append(newsImageFigure);
+
+        let contentContainer = document.createElement("div");
+        contentContainer.classList.add("article_ct");
+
+        //NEWS TITLE AND SUBTITLE
+        let newsTitle = document.createElement("h1");
+        newsTitle.innerText = listNews[currentNews].title;
+        let newsSubtitle = document.createElement("h4");
+        newsSubtitle.classList.add("subtitle");
+        newsSubtitle.innerText = listNews[currentNews].subtitle;
+        contentContainer.append(newsSubtitle);
+        contentContainer.append(newsTitle);
+        article.append(contentContainer);
+
+        let footArticle = document.createElement("div");
+        footArticle.classList.add("foot_article");
+
+        //SET CATEGORY
+        let category = document.createElement("a");
+        category.setAttribute("title", "liga prancis");
+        category.innerText = "Olahraga";
+        footArticle.append(category);
+        contentContainer.append(footArticle);
+
+        // SET TOPICS
+        for (let i = 0; i < listNews[currentNews].topics.length; i++) {
+          let topic = document.createElement("a");
+          let icon = document.createElement("i");
+          icon.classList.add("fa", "fa-folder");
+          topic.classList.add("topic");
+          topic.setAttribute("title", listNews[currentNews].topics[i]);
+          topic.append(icon);
+          topic.append(` ${listNews[currentNews].topics[i]}`);
+          //SET TOPICS LINK
+          topic.setAttribute("href", "");
+          footArticle.append(topic);
+        }
+
+        let info = document.createElement("div");
+        info.classList.add("info");
+
+        // CREATE AUTHOR & DATE
+        let info_ct = document.createElement("div");
+        info_ct.classList.add("info_ct");
+        info_ct.innerText = `${listNews[currentNews].author} • ${listNews[currentNews].date}`;
+        info.append(info_ct);
+        contentContainer.append(info);
+
+        // CLONE TOOL SECTION
+        let tool = document.querySelector(".tool_bt").cloneNode(true);
+        info.append(tool);
+
+        // TEXT CONTENT
+        let textContent = document.createElement("div");
+        textContent.classList.add("text");
+
+        textContent.setAttribute("id", "articleBody");
+        textContent.setAttribute("itemprop", "articleBody");
+        contentContainer.append(textContent);
+
+        // CREATE LOADER ANIMATION
+        // let loader = document.createElement("div");
+        // let loadImage = document.createElement("div");
+        // let loadingText = document.createElement("p");
+        // loadingText.innerText = "LOADING";
+        // loader.classList.add("loader");
+
+        // loader.append(loadImage);
+        // loader.append(loadingText);
+
+        //SOCMED BUTTON
+        let socmed = document.getElementById("stickshare");
+        contentContainer.append(socmed);
+
+        //BOTTOM ARTICLE
+        let bottomArticle = document.createElement("div");
+        bottomArticle.classList.add("bottom_article");
+        let listBottomArticle = document.createElement("ul");
+        let itemBottomArticle = document.createElement("li");
+        let linkBottomArticle = document.createElement("a");
+        linkBottomArticle.innerText = listNews[currentNews].breadcrumb[2];
+        linkBottomArticle.setAttribute(
+          "title",
+          listNews[currentNews].breadcrumb[2]
+        );
+        linkBottomArticle.setAttribute("href", "");
+
+        let subscribeBtn = document.createElement("button");
+        let subscribeBtnIcon = document.createElement("i");
+        subscribeBtnIcon.classList.add("fa", "fa-bell");
+        subscribeBtn.classList.add("subs");
+        subscribeBtn.setAttribute("value", 1);
+
+        subscribeBtn.append(subscribeBtnIcon);
+        subscribeBtn.innerHTML += "Subscribe";
+
+        itemBottomArticle.append(linkBottomArticle);
+        listBottomArticle.append(itemBottomArticle);
+        bottomArticle.append(listBottomArticle);
+        bottomArticle.append(subscribeBtn);
+        contentContainer.append(bottomArticle);
+
+        // BOX COMMENT
+        let boxCommentContainer = document.createElement("div");
+        let commentTitle = document.createElement("div");
+        let titleText = document.createElement("span");
+        let boxCommentContent = document.createElement("div");
+
+        boxCommentContainer.classList.add("box_14", "comment_section");
+        commentTitle.classList.add("ti_1", "white");
+        boxCommentContent.classList.add("box_7");
+
+        commentTitle.append(titleText);
+        boxCommentContainer.append(commentTitle);
+        boxCommentContainer.append(boxCommentContent);
+
+        titleText.innerText = "LEAVE A COMMENT";
+        article.append(boxCommentContainer);
+
+        articleParent.append(article);
+    
+
+        loadFirstContent(currentNews, textContent, listNews[currentNews].url);
+
+        if (
+          $(this).scrollTop() > $(".article").eq(currentNews).position().top &&
+          $(this).scrollTop() >
+            $(".article")
+              .eq(currentNews)
+              .find(".article_ct .text")
+              .outerHeight() +
+              200 &&
+          currentPage < listNews[currentNews].listText.length
+        ) {
+          if (flag === false) {
+            loadContent(
+              currentNews,
+              articleText,
+              listNews[currentNews].url,
+              currentPage,
+              listNews[currentNews].listText.length
+            );
+            currentPage++;
+            if (currentPage === listNews[currentNews].listText.length) {
+              flag = true;
+            }
+          }
+        } else {
+          console.log("GAADA");
         }
       }
     }
-
-    // LOAD BERITA BARU APABILA SUDAH SCROLL SAMPAI PALING BAWAH
-    // if (
-    //   $(this).scrollTop() + $(this).height() > $(document).height() - 10 &&
-    //   currentNews < listNews.length
-    // ) {
-    //   $("load_new_news").css("display", "block");
-    //   currentPage = 1;
-    //   currentNews++;
-
-    //   if (currentNews < listNews.length) {
-    //     $("load_new_news").css("display", "none");
-    //     document.title = listNews[currentNews].title;
-
-    //     let article = document.createElement("div");
-    //     article.classList.add("article");
-
-    //     // BREADCRUMB
-    //     let breadcrumb = document.createElement("div");
-    //     breadcrumb.classList.add("breadcrumb");
-    //     let listBreadcrumb = document.createElement("ul");
-
-    //     for (let i = 0; i < listNews[currentNews].breadcrumb.length; i++) {
-    //       let breadcrumbItem = document.createElement("li");
-    //       let breadcrumbLink = document.createElement("a");
-    //       breadcrumbLink.innerText = listNews[currentNews].breadcrumb[i];
-    //       breadcrumbLink.setAttribute("href", "");
-    //       breadcrumbItem.append(breadcrumbLink);
-    //       listBreadcrumb.append(breadcrumbItem);
-    //     }
-
-    //     breadcrumb.append(listBreadcrumb);
-    //     article.append(breadcrumb);
-
-    //     // SHOWING NEWS IMAGE AND IMAGE CAPTION
-    //     let newsImageFigure = document.createElement("div");
-    //     newsImageFigure.classList.add("pic");
-    //     let newsImage = document.createElement("img");
-    //     newsImage.setAttribute("src", listNews[currentNews].imageSrc);
-    //     newsImage.setAttribute("alt", listNews[currentNews].imageAlt);
-    //     let newsImageCaption = document.createElement("div");
-    //     newsImageCaption.classList.add("caption");
-    //     newsImageCaption.innerText = listNews[currentNews].imageAlt;
-
-    //     newsImageFigure.append(newsImage);
-    //     newsImageFigure.append(newsImageCaption);
-    //     article.append(newsImageFigure);
-
-    //     let contentContainer = document.createElement("div");
-    //     contentContainer.classList.add("article_ct");
-
-    //     //NEWS TITLE AND SUBTITLE
-    //     let newsTitle = document.createElement("h1");
-    //     newsTitle.innerText = listNews[currentNews].title;
-    //     let newsSubtitle = document.createElement("h4");
-    //     newsSubtitle.classList.add("subtitle");
-    //     newsSubtitle.innerText = listNews[currentNews].subtitle;
-    //     contentContainer.append(newsSubtitle);
-    //     contentContainer.append(newsTitle);
-    //     article.append(contentContainer);
-
-    //     let footArticle = document.createElement("div");
-    //     footArticle.classList.add("foot_article");
-
-    //     //SET CATEGORY
-    //     let category = document.createElement("a");
-    //     category.setAttribute("title", "liga prancis");
-    //     category.innerText = "Olahraga";
-    //     footArticle.append(category);
-    //     contentContainer.append(footArticle);
-
-    //     // SET TOPICS
-    //     for (let i = 0; i < listNews[currentNews].topics.length; i++) {
-    //       let topic = document.createElement("a");
-    //       let icon = document.createElement("i");
-    //       icon.classList.add("fa", "fa-folder");
-    //       topic.classList.add("topic");
-    //       topic.setAttribute("title", listNews[currentNews].topics[i]);
-    //       topic.append(icon);
-    //       topic.append(` ${listNews[currentNews].topics[i]}`);
-    //       //SET TOPICS LINK
-    //       topic.setAttribute("href", "");
-    //       footArticle.append(topic);
-    //     }
-
-    //     let info = document.createElement("div");
-    //     info.classList.add("info");
-
-    //     // CREATE AUTHOR & DATE
-    //     let info_ct = document.createElement("div");
-    //     info_ct.classList.add("info_ct");
-    //     info_ct.innerText = `${listNews[currentNews].author} • ${listNews[currentNews].date}`;
-    //     info.append(info_ct);
-    //     contentContainer.append(info);
-
-    //     // CLONE TOOL SECTION
-    //     let tool = document.querySelector(".tool_bt").cloneNode(true);
-    //     info.append(tool);
-
-    //     // TEXT CONTENT
-    //     let textContent = document.createElement("div");
-    //     textContent.classList.add("text");
-
-    //     textContent.setAttribute("id", "articleBody");
-    //     textContent.setAttribute("itemprop", "articleBody");
-    //     contentContainer.append(textContent);
-
-    //     // CREATE LOADER ANIMATION
-    //     // let loader = document.createElement("div");
-    //     // let loadImage = document.createElement("div");
-    //     // let loadingText = document.createElement("p");
-    //     // loadingText.innerText = "LOADING";
-    //     // loader.classList.add("loader");
-
-    //     // loader.append(loadImage);
-    //     // loader.append(loadingText);
-
-    //     //SOCMED BUTTON
-    //     let socmed = document.getElementById("stickshare");
-    //     contentContainer.append(socmed);
-
-    //     //BOTTOM ARTICLE
-    //     let bottomArticle = document.createElement("div");
-    //     bottomArticle.classList.add("bottom_article");
-    //     let listBottomArticle = document.createElement("ul");
-    //     let itemBottomArticle = document.createElement("li");
-    //     let linkBottomArticle = document.createElement("a");
-    //     linkBottomArticle.innerText = listNews[currentNews].breadcrumb[2];
-    //     linkBottomArticle.setAttribute(
-    //       "title",
-    //       listNews[currentNews].breadcrumb[2]
-    //     );
-    //     linkBottomArticle.setAttribute("href", "");
-
-    //     itemBottomArticle.append(linkBottomArticle);
-    //     listBottomArticle.append(itemBottomArticle);
-    //     bottomArticle.append(listBottomArticle);
-    //     contentContainer.append(bottomArticle);
-
-    //     articleParent.append(article);
-
-    //     loadFirstContent(currentNews, textContent, listNews[currentNews].url);
-
-    //     if (
-    //       $(this).scrollTop() >
-    //         $(".article")
-    //           .eq(currentNews)
-    //           .find(".article_ct .text")
-    //           .outerHeight() +
-    //           200 &&
-    //       currentPage < listNews[currentNews].listText.length
-    //     ) {
-    //       loadContent(
-    //         currentNews,
-    //         $(".article").find(".article_ct .text"),
-    //         listNews[currentNews].url,
-    //         currentPage,
-    //         listNews[currentNews].listText.length
-    //       );
-    //       currentPage++;
-    //     }
-    //   }
-    // }
   });
 });
