@@ -1,7 +1,7 @@
 $(document).ready(function () {
   const listNews = [
     {
-      url: "index.html",
+      url: "teknologi/game/ObzVpOeb-gta-trilogy-definitive-edition-bikin-kecewa-rockstar-minta-maaf-dan-janjikan-ini",
       breadcrumb: ["Home", "Teknologi", "Game"],
       category: "Teknologi",
       topics: [
@@ -31,7 +31,7 @@ $(document).ready(function () {
       ],
     },
     {
-      url: "page2.html",
+      url: "/hiburan/selebritas/8N0wYAEK-5-film-dan-drama-mengharukan-tentang-keluarga",
       breadcrumb: ["Home", "Hiburan", "Selebritas"],
       category: "Hiburan",
       topics: ["rekomendasi film", "trivia film", "film netflix"],
@@ -52,11 +52,12 @@ $(document).ready(function () {
       ],
     },
     {
-      url: "page3.html",
+      url: "/nasional/politik/ybJrEXAb-jokowi-perintahkan-jajaran-siapkan-strategi-menuju-ekosistem-digital",
       breadcrumb: ["Home", "Hiburan", "Selebritas"],
       category: "Hiburan",
       topics: ["rekomendasi film", "trivia film", "film netflix"],
-      title: "Jokowi Perintahkan Jajaran Siapkan Strategi Menuju Ekosistem Digital",
+      title:
+        "Jokowi Perintahkan Jajaran Siapkan Strategi Menuju Ekosistem Digital",
       subtitle: "",
       author: "Andhika Prasetyo",
       date: "26 Juni 2021 09:00",
@@ -69,7 +70,6 @@ $(document).ready(function () {
         "Menurut Jokowi, Indonesia memiliki 2.319 startup. Tujuh di antaranya sudah berstatus unicorn dan satu sudah menyentuh decacorn.",
         "Kepala Negara meminta semua itu didukung dengan berbagai kebijakan yang tepat. Salah satunya, melalui pengembangan ekosistem digital.",
         `"Ini sudah kejar-kejaran. Begitu kita tidak bisa melangkah, tidak bisa mengejar, ya sudah, kita akan semakin jauh ketinggalan," kata Jokowi.`,
-        "5. Hi Bye, Mama! Hi Bye, Mama! merupakan drama Korea yang akan membuat Anda berurai air mata. Serial ini menceritakan tentang Cha Yu-ri (diperankan Kim Tae-hee), hantu wanita yang mendapat kesempatan kedua untuk kembali hidup selama 49 hari. Dia pun harus mencoba menemukan tempatnya kembali di kehidupan baru anak dan suaminya yang kini telah menikah lagi. Hi Bye, Mama! menyuguhkan perjuangan dan penyesalan dari mereka yang telah meninggal dan ditinggalkan. Drama ini akan menghanyutkan Anda dengan pesan-pesannya yang berharga mengenai keluarga.",
       ],
     },
   ];
@@ -78,9 +78,9 @@ $(document).ready(function () {
   let articleText = document.querySelector(".article_ct .text");
   let currentNews = 0;
   let currentPage = 1;
-  let nextPage = false;
   let totalNews = listNews.length;
-  let lastOuterHeight = 0;
+  let lastScroll = 0;
+
   function loadFirstContent(countNews, textContainer, pageUrl) {
     let text = document.createElement("p");
     $(text).text(listNews[countNews].listText[0]);
@@ -88,20 +88,7 @@ $(document).ready(function () {
     text.style.marginBottom = "80px";
     text.classList.add("split-text");
     history.pushState(null, null, pageUrl);
-    return console.log("value count news " + countNews);
-  }
-
-  function loadContent(currentNews, textContainer, pageUrl, page, totalPage) {
     $(".loader").css("display", "block");
-    let text = document.createElement("p");
-    text.innerText = listNews[currentNews].listText[page];
-    text.style.marginBottom = "80px";
-    text.classList.add("split-text");
-    textContainer.append(text);
-    history.pushState(null, null, `${pageUrl}?page=${page + 1}`);
-    if (page === totalPage - 1) {
-      $(".loader").css("display", "none");
-    }
   }
 
   loadFirstContent(currentNews, articleText, listNews[currentNews].url);
@@ -113,196 +100,200 @@ $(document).ready(function () {
       200;
     let totalText = listNews[currentNews].listText.length;
 
-    // LOAD PAGINASI DATA
-    if (scrollTop > articleTextOuterHeight && currentPage < totalText) {
-      if (nextPage === false) {
-        loadContent(
-          currentNews,
-          articleText,
-          listNews[currentNews].url,
-          currentPage,
-          totalText
-        );
+    // LOAD TEKS ARTIKEL SELANJUTNYA
+    if (
+      scrollTop > articleTextOuterHeight &&
+      $(".article").eq(currentNews).find(".split-text").length > 0 &&
+      document
+        .querySelectorAll(".article")
+        [currentNews].querySelector(".article_ct .text")
+        .getBoundingClientRect().bottom < 500 &&
+      currentPage < totalText
+    ) {
+      $(".article")
+        .eq(currentNews)
+        .find($(".article_ct .loader"))
+        .css("display", "block");
+      let url = listNews[currentNews].url;
+      let text = document.createElement("p");
+      let textContainer = $(".article")
+        .eq(currentNews)
+        .find(".article_ct .text");
+      text.innerText = listNews[currentNews].listText[currentPage];
+      text.style.marginBottom = "80px";
+      text.classList.add("split-text");
+      textContainer.append(text);
+      history.pushState(null, null, `${url}?page=${currentPage + 1}`);
+      if (currentPage === totalText - 1) {
+        $(".loader").css("display", "none");
 
-        currentPage++;
-
-        if (currentPage === totalText) {
-          nextPage = true;
-        }
+        $(".load_new_news").eq(currentNews).css("display", "block");
       }
+
+      currentPage++;
     }
 
- 
+
 
     // LOAD BERITA BARU APABILA SUDAH SCROLL SAMPAI PALING BAWAH
     if (
-      scrollTop + $(this).height() > $(document).height() - 10 &&
-      currentNews < listNews.length - 1
+      scrollTop + $(this).height() === $(document).height()  &&
+      currentNews < totalNews - 1
     ) {
+      
       $("load_new_news").css("display", "block");
       currentPage = 1;
       currentNews++;
 
-      $("load_new_news").css("display", "none");
-      document.title = listNews[currentNews].title;
+      setTimeout(() => {
+        $('.article').eq(currentNews - 1).find('.loader').css('display', 'none')
+        $(".load_new_news").css("display", "none");
+        document.title = listNews[currentNews].title;
 
-      let article = document.createElement("div");
-      article.classList.add("article");
+        let article = document.createElement("div");
+        article.classList.add("article");
 
-      // BREADCRUMB
-      let breadcrumb = document.createElement("div");
-      breadcrumb.classList.add("breadcrumb");
-      let listBreadcrumb = document.createElement("ul");
+        // BREADCRUMB
+        let breadcrumb = document.createElement("div");
+        breadcrumb.classList.add("breadcrumb");
+        let listBreadcrumb = document.createElement("ul");
 
-      for (let i = 0; i < listNews[currentNews].breadcrumb.length; i++) {
-        let breadcrumbItem = document.createElement("li");
-        let breadcrumbLink = document.createElement("a");
-        breadcrumbLink.innerText = listNews[currentNews].breadcrumb[i];
-        breadcrumbLink.setAttribute("href", "");
-        breadcrumbItem.append(breadcrumbLink);
-        listBreadcrumb.append(breadcrumbItem);
-      }
+        for (let i = 0; i < listNews[currentNews].breadcrumb.length; i++) {
+          let breadcrumbItem = document.createElement("li");
+          let breadcrumbLink = document.createElement("a");
+          breadcrumbLink.innerText = listNews[currentNews].breadcrumb[i];
+          breadcrumbLink.setAttribute("href", "");
+          breadcrumbItem.append(breadcrumbLink);
+          listBreadcrumb.append(breadcrumbItem);
+        }
 
-      breadcrumb.append(listBreadcrumb);
-      article.append(breadcrumb);
+        breadcrumb.append(listBreadcrumb);
+        article.append(breadcrumb);
 
-      // SHOWING NEWS IMAGE AND IMAGE CAPTION
-      let newsImageFigure = document.createElement("div");
-      newsImageFigure.classList.add("pic");
-      let newsImage = document.createElement("img");
-      newsImage.setAttribute("src", listNews[currentNews].imageSrc);
-      newsImage.setAttribute("alt", listNews[currentNews].imageAlt);
-      let newsImageCaption = document.createElement("div");
-      newsImageCaption.classList.add("caption");
-      newsImageCaption.innerText = listNews[currentNews].imageAlt;
+        // SHOWING NEWS IMAGE AND IMAGE CAPTION
+        let newsImageFigure = document.createElement("div");
+        newsImageFigure.classList.add("pic");
+        let newsImage = document.createElement("img");
+        newsImage.setAttribute("src", listNews[currentNews].imageSrc);
+        newsImage.setAttribute("alt", listNews[currentNews].imageAlt);
+        let newsImageCaption = document.createElement("div");
+        newsImageCaption.classList.add("caption");
+        newsImageCaption.innerText = listNews[currentNews].imageAlt;
 
-      newsImageFigure.append(newsImage);
-      newsImageFigure.append(newsImageCaption);
-      article.append(newsImageFigure);
+        newsImageFigure.append(newsImage);
+        newsImageFigure.append(newsImageCaption);
+        article.append(newsImageFigure);
 
-      let contentContainer = document.createElement("div");
-      contentContainer.classList.add("article_ct");
+        let contentContainer = document.createElement("div");
+        contentContainer.classList.add("article_ct");
 
-      //NEWS TITLE AND SUBTITLE
-      let newsTitle = document.createElement("h1");
-      newsTitle.innerText = listNews[currentNews].title;
-      let newsSubtitle = document.createElement("h4");
-      newsSubtitle.classList.add("subtitle");
-      newsSubtitle.innerText = listNews[currentNews].subtitle;
-      contentContainer.append(newsSubtitle);
-      contentContainer.append(newsTitle);
-      article.append(contentContainer);
+        //NEWS TITLE AND SUBTITLE
+        let newsTitle = document.createElement("h1");
+        newsTitle.innerText = listNews[currentNews].title;
+        let newsSubtitle = document.createElement("h4");
+        newsSubtitle.classList.add("subtitle");
+        newsSubtitle.innerText = listNews[currentNews].subtitle;
+        contentContainer.append(newsSubtitle);
+        contentContainer.append(newsTitle);
+        article.append(contentContainer);
 
-      let footArticle = document.createElement("div");
-      footArticle.classList.add("foot_article");
+        let footArticle = document.createElement("div");
+        footArticle.classList.add("foot_article");
 
-      //SET CATEGORY
-      let category = document.createElement("a");
-      category.setAttribute("title", "liga prancis");
-      category.innerText = "Olahraga";
-      footArticle.append(category);
-      contentContainer.append(footArticle);
+        //SET CATEGORY
+        let category = document.createElement("a");
+        category.setAttribute("title", "liga prancis");
+        category.innerText = "Olahraga";
+        footArticle.append(category);
+        contentContainer.append(footArticle);
 
-      // SET TOPICS
-      for (let i = 0; i < listNews[currentNews].topics.length; i++) {
-        let topic = document.createElement("a");
-        let icon = document.createElement("i");
-        icon.classList.add("fa", "fa-folder");
-        topic.classList.add("topic");
-        topic.setAttribute("title", listNews[currentNews].topics[i]);
-        topic.append(icon);
-        topic.append(` ${listNews[currentNews].topics[i]}`);
-        //SET TOPICS LINK
-        topic.setAttribute("href", "");
-        footArticle.append(topic);
-      }
+        // SET TOPICS
+        for (let i = 0; i < listNews[currentNews].topics.length; i++) {
+          let topic = document.createElement("a");
+          let icon = document.createElement("i");
+          icon.classList.add("fa", "fa-folder");
+          topic.classList.add("topic");
+          topic.setAttribute("title", listNews[currentNews].topics[i]);
+          topic.append(icon);
+          topic.append(` ${listNews[currentNews].topics[i]}`);
+          //SET TOPICS LINK
+          topic.setAttribute("href", "");
+          footArticle.append(topic);
+        }
 
-      let info = document.createElement("div");
-      info.classList.add("info");
+        let info = document.createElement("div");
+        info.classList.add("info");
 
-      // CREATE AUTHOR & DATE
-      let info_ct = document.createElement("div");
-      info_ct.classList.add("info_ct");
-      info_ct.innerText = `${listNews[currentNews].author} • ${listNews[currentNews].date}`;
-      info.append(info_ct);
-      contentContainer.append(info);
+        // CREATE AUTHOR & DATE
+        let info_ct = document.createElement("div");
+        info_ct.classList.add("info_ct");
+        info_ct.innerText = `${listNews[currentNews].author} • ${listNews[currentNews].date}`;
+        info.append(info_ct);
+        contentContainer.append(info);
 
-      // CLONE TOOL SECTION
-      let tool = document.querySelector(".tool_bt").cloneNode(true);
-      info.append(tool);
+        // CLONE TOOL SECTION
+        let tool = document.querySelector(".tool_bt").cloneNode(true);
+        info.append(tool);
 
-      // TEXT CONTENT
-      let textContent = document.createElement("div");
-      textContent.classList.add("text");
+        // TEXT CONTENT
+        let textContent = document.createElement("div");
+        textContent.classList.add("text");
 
-      textContent.setAttribute("id", "articleBody");
-      textContent.setAttribute("itemprop", "articleBody");
-      contentContainer.append(textContent);
+        textContent.setAttribute("id", "articleBody");
+        textContent.setAttribute("itemprop", "articleBody");
+        contentContainer.append(textContent);
 
-      // CREATE LOADER ANIMATION
-      let loader = document.createElement("div");
-      let loadImage = document.createElement("div");
-      let loadingText = document.createElement("p");
-      loadingText.innerText = "LOADING";
-      loader.classList.add("loader");
+        // CREATE LOADER ANIMATION
+        let getLoader = document.querySelector(".loader").cloneNode(true);
+        contentContainer.append(getLoader);
 
-      loader.append(loadImage);
-      loader.append(loadingText);
+        //SOCMED BUTTON
+        let socmed = document.getElementById("stickshare");
+        contentContainer.append(socmed);
 
-      //SOCMED BUTTON
-      let socmed = document.getElementById("stickshare");
-      contentContainer.append(socmed);
+        //BOTTOM ARTICLE
+        let bottomArticle = document.createElement("div");
+        bottomArticle.classList.add("bottom_article");
+        let listBottomArticle = document.createElement("ul");
+        let itemBottomArticle = document.createElement("li");
+        let linkBottomArticle = document.createElement("a");
+        linkBottomArticle.innerText = listNews[currentNews].breadcrumb[2];
+        linkBottomArticle.setAttribute(
+          "title",
+          listNews[currentNews].breadcrumb[2]
+        );
+        linkBottomArticle.setAttribute("href", "");
 
-      //BOTTOM ARTICLE
-      let bottomArticle = document.createElement("div");
-      bottomArticle.classList.add("bottom_article");
-      let listBottomArticle = document.createElement("ul");
-      let itemBottomArticle = document.createElement("li");
-      let linkBottomArticle = document.createElement("a");
-      linkBottomArticle.innerText = listNews[currentNews].breadcrumb[2];
-      linkBottomArticle.setAttribute(
-        "title",
-        listNews[currentNews].breadcrumb[2]
-      );
-      linkBottomArticle.setAttribute("href", "");
+        itemBottomArticle.append(linkBottomArticle);
+        listBottomArticle.append(itemBottomArticle);
+        bottomArticle.append(listBottomArticle);
+        contentContainer.append(bottomArticle);
 
-      itemBottomArticle.append(linkBottomArticle);
-      listBottomArticle.append(itemBottomArticle);
-      bottomArticle.append(listBottomArticle);
-      contentContainer.append(bottomArticle);
+        // CREATE BOX COMMENT
+        let boxCommentContainer = document.createElement("div");
+        boxCommentContainer.classList.add("box_14", "comment_section");
+        let boxCommentTitleContainer = document.createElement("div");
+        boxCommentTitleContainer.classList.add("ti_1", "white");
+        let commentTitle = document.createElement("span");
+        commentTitle.innerText = "LEAVE A COMMENT";
 
-      // CREATE BOX COMMENT
-      let boxCommentContainer = document.createElement("div");
-      boxCommentContainer.classList.add("box_14", "comment_section");
-      let boxCommentTitleContainer = document.createElement("div");
-      boxCommentTitleContainer.classList.add("ti_1", "white");
-      let commentTitle = document.createElement("span");
-      commentTitle.innerText = "LEAVE A COMMENT";
+        boxCommentTitleContainer.append(commentTitle);
+        boxCommentContainer.append(boxCommentTitleContainer);
+        article.append(boxCommentContainer);
 
-      boxCommentTitleContainer.append(commentTitle);
-      boxCommentContainer.append(boxCommentTitleContainer);
-      article.append(boxCommentContainer)
+        articleParent.append(article);
 
-      articleParent.append(article);
+        if (currentNews < totalNews) {
+          // CREATE SKELETON LOAD NEW NEWS
+          let skeletonLoadNewNews = document
+            .querySelector(".load_new_news")
+            .cloneNode(true);
+          articleParent.append(skeletonLoadNewNews);
+        }
 
-      loadFirstContent(currentNews, textContent, listNews[currentNews].url);
-    }
-
-    console.log(document.querySelectorAll('.article')[currentNews].querySelector('.article_ct .text').getBoundingClientRect().bottom)
-    if (
-      scrollTop > articleTextOuterHeight &&
-      $(".article").eq(currentNews).find(".split-text").length > 0 && document.querySelectorAll('.article')[currentNews].querySelector('.article_ct .text').getBoundingClientRect().bottom < 500 &&
-      currentPage < totalText
-    ) {
-      loadContent(
-        currentNews,
-        $(".article").eq(currentNews).find(".article_ct .text"),
-        listNews[currentNews].url,
-        currentPage,
-        totalText
-      );
-      currentPage++;
-      console.log("tes");
+        $(".load_new_news").css("display", "none");
+        loadFirstContent(currentNews, textContent, listNews[currentNews].url);
+      }, 500);
     }
   });
 });
