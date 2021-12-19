@@ -26,6 +26,9 @@
 }
  */
 
+.loader {
+  display: none;
+}
 
 .loader .line {
   height: 10px;

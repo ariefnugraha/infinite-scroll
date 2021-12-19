@@ -3,7 +3,10 @@ $(document).ready(function () {
     {
       url: "teknologi/game/ObzVpOeb-gta-trilogy-definitive-edition-bikin-kecewa-rockstar-minta-maaf-dan-janjikan-ini",
       breadcrumb: ["Home", "Teknologi", "Game"],
-      category: "Teknologi",
+      category: {
+        url: "https://www.medcom.id/nasional/",
+        name: "Nasional",
+      },
       topics: [
         "game",
         "xbox",
@@ -33,8 +36,28 @@ $(document).ready(function () {
     {
       url: "/hiburan/selebritas/8N0wYAEK-5-film-dan-drama-mengharukan-tentang-keluarga",
       breadcrumb: ["Home", "Hiburan", "Selebritas"],
-      category: "Hiburan",
-      topics: ["rekomendasi film", "trivia film", "film netflix"],
+      category: {
+        url: "https://www.medcom.id/nasional/",
+        name: "Nasional",
+      },
+      topics: [
+        {
+          url: "https://www.medcom.id/tag/357/pilkada?utm_source=nasional&utm_medium=topik&utm_campaign=detail_desktop",
+          name: "pilkada",
+        },
+        {
+          url: "https://www.medcom.id/tag/441/pemilu?utm_source=nasional&utm_medium=topik&utm_campaign=detail_desktop",
+          name: "pemilu",
+        },
+        {
+          url: "https://www.medcom.id/tag/16516/pilpres-2024?utm_source=nasional&utm_medium=topik&utm_campaign=detail_desktop",
+          name: "Pilpres 2024",
+        },
+        {
+          url: "https://www.medcom.id/tag/1607/pilpres?utm_source=nasional&utm_medium=topik&utm_campaign=detail_desktop",
+          name: "pilpres",
+        },
+      ],
       title: "5 Film dan Drama Mengharukan tentang Keluarga",
       subtitle: "",
       author: "Sunnaholomi Halakrispen",
@@ -50,12 +73,80 @@ $(document).ready(function () {
         "4. June & Kopi Siapa bilang hewan peliharaan tidak bisa menjadi keluarga kita? June & Kopi membuktikan hal ini lewat kisahnya yang menggemaskan sekaligus mengharukan mengenai persahabatan antara anjing dan manusia. Film ini dibintangi oleh Acha Septriasa, Ryan Delon, dan aktris cilik berbakat Makayla Rose Hilli. Film June & Kopi menceritakan seekor anjing jalanan bernama June yang diselamatkan oleh sepasang suami-istri. Seiring dengan kehidupan barunya, June pun akhirnya belajar untuk mempercayai serta menerima keluarga barunya. Sebuah tayangan mengenai keluarga yang sarat makna, June & Kopi juga mengajak kita untuk lebih menghargai hewan peliharaan kita.",
         "5. Hi Bye, Mama! Hi Bye, Mama! merupakan drama Korea yang akan membuat Anda berurai air mata. Serial ini menceritakan tentang Cha Yu-ri (diperankan Kim Tae-hee), hantu wanita yang mendapat kesempatan kedua untuk kembali hidup selama 49 hari. Dia pun harus mencoba menemukan tempatnya kembali di kehidupan baru anak dan suaminya yang kini telah menikah lagi. Hi Bye, Mama! menyuguhkan perjuangan dan penyesalan dari mereka yang telah meninggal dan ditinggalkan. Drama ini akan menghanyutkan Anda dengan pesan-pesannya yang berharga mengenai keluarga.",
       ],
+      bacaJuga: [
+        {
+          url: "https://www.medcom.id/teknologi/esports/4KZ2WgJK-hari-ini-laga-turnamen-pubg-mobile-di-metrofest-cup-2021-resmi-digelar?utm_source=teknologi&utm_medium=baca_juga&utm_campaign=detail_desktop",
+          img: "https://cdn.medcom.id/dynamic/content/2021/11/21/1355400/PxrfIYnSK0.jpg?w=220",
+          imgAlt:
+            "Hari Ini, Laga Turnamen PUBG Mobile di METROFEST Cup 2021 Resmi Digelar!",
+          title:
+            "Hari Ini, Laga Turnamen PUBG Mobile di METROFEST Cup 2021 Resmi Digelar!",
+          category: {
+            url: "https://www.medcom.id/nasional/",
+            name: "nasional",
+          },
+          topics: {
+            url: "https://www.medcom.id/tag/8969/esports",
+            name: "esport",
+          },
+        },
+        {
+          url: "https://www.medcom.id/nasional/hukum/ob34Jwyk-14-teroris-yang-ditangkap-di-sumatra-hingga-batam-jaringan-ji?utm_source=nasional&utm_medium=baca_juga&utm_campaign=detail_desktop",
+          img: "https://cdn.medcom.id/dynamic/content/2021/12/17/1365957/otCUGhmH0M.jpg?w=220",
+          imgAlt:
+            "14 Teroris yang Ditangkap di Sumatra Hingga Batam Jaringan JI",
+          title:
+            "14 Teroris yang Ditangkap di Sumatra Hingga Batam Jaringan JI",
+          category: {
+            url: "https://www.medcom.id/nasional/",
+            name: "nasional",
+          },
+          topics: {
+            url: "https://www.medcom.id/tag/2696/teroris",
+            name: "teroris",
+          },
+        },
+        {
+          url: "https://www.medcom.id/teknologi/esports/4KZ2WgJK-hari-ini-laga-turnamen-pubg-mobile-di-metrofest-cup-2021-resmi-digelar?utm_source=teknologi&utm_medium=baca_juga&utm_campaign=detail_desktop",
+          img: "https://cdn.medcom.id/dynamic/content/2021/12/17/1365952/8ZD07AfUnS.jpg?w=220",
+          imgAlt: "Kasus Omicron Pertama di Indonesia Jadi Alarm Kewaspadaan",
+          title: "Kasus Omicron Pertama di Indonesia Jadi Alarm Kewaspadaan",
+          category: {
+            url: "https://www.medcom.id/nasional/",
+            name: "nasional",
+          },
+          topics: {
+            url: "https://www.medcom.id/tag/14692/satgas-covid-19",
+            name: "Satgas Covid 19",
+          },
+        },
+      ],
     },
     {
       url: "/nasional/politik/ybJrEXAb-jokowi-perintahkan-jajaran-siapkan-strategi-menuju-ekosistem-digital",
       breadcrumb: ["Home", "Hiburan", "Selebritas"],
-      category: "Hiburan",
-      topics: ["rekomendasi film", "trivia film", "film netflix"],
+      category: {
+        url: "https://www.medcom.id/nasional/",
+        name: "Nasional",
+      },
+      topics: [
+        {
+          url: "https://www.medcom.id/tag/357/pilkada?utm_source=nasional&utm_medium=topik&utm_campaign=detail_desktop",
+          name: "pilkada",
+        },
+        {
+          url: "https://www.medcom.id/tag/441/pemilu?utm_source=nasional&utm_medium=topik&utm_campaign=detail_desktop",
+          name: "pemilu",
+        },
+        {
+          url: "https://www.medcom.id/tag/16516/pilpres-2024?utm_source=nasional&utm_medium=topik&utm_campaign=detail_desktop",
+          name: "Pilpres 2024",
+        },
+        {
+          url: "https://www.medcom.id/tag/1607/pilpres?utm_source=nasional&utm_medium=topik&utm_campaign=detail_desktop",
+          name: "pilpres",
+        },
+      ],
       title:
         "Jokowi Perintahkan Jajaran Siapkan Strategi Menuju Ekosistem Digital",
       subtitle: "",
@@ -71,6 +162,54 @@ $(document).ready(function () {
         "Kepala Negara meminta semua itu didukung dengan berbagai kebijakan yang tepat. Salah satunya, melalui pengembangan ekosistem digital.",
         `"Ini sudah kejar-kejaran. Begitu kita tidak bisa melangkah, tidak bisa mengejar, ya sudah, kita akan semakin jauh ketinggalan," kata Jokowi.`,
       ],
+      bacaJuga: [
+        {
+          url: "https://www.medcom.id/teknologi/esports/4KZ2WgJK-hari-ini-laga-turnamen-pubg-mobile-di-metrofest-cup-2021-resmi-digelar?utm_source=teknologi&utm_medium=baca_juga&utm_campaign=detail_desktop",
+          img: "https://cdn.medcom.id/dynamic/content/2021/11/21/1355400/PxrfIYnSK0.jpg?w=220",
+          imgAlt:
+            "Pegawai Honor Kelurahan Jombang Ditetepkan Tersangka Pencabulan",
+          title:
+            "Pegawai Honor Kelurahan Jombang Ditetepkan Tersangka Pencabulan",
+          category: {
+            url: "https://www.medcom.id/nasional/",
+            name: "Nasional",
+          },
+          topics: {
+            url: "https://www.medcom.id/tag/8969/esports",
+            name: "esport",
+          },
+        },
+        {
+          url: "https://www.medcom.id/nasional/hukum/ob34Jwyk-14-teroris-yang-ditangkap-di-sumatra-hingga-batam-jaringan-ji?utm_source=nasional&utm_medium=baca_juga&utm_campaign=detail_desktop",
+          img: "https://cdn.medcom.id/dynamic/content/2021/12/17/1365947/nWOaV3qdZx.jpeg?w=220",
+          imgAlt: "Jabatan Oded Resmi Diberhentikan",
+          title: "Jabatan Oded Resmi Diberhentikan",
+          category: {
+            url: "https://www.medcom.id/nasional/",
+            name: "Nasional",
+          },
+          topics: {
+            url: "https://www.medcom.id/tag/2696/teroris",
+            name: "teroris",
+          },
+        },
+        {
+          url: "https://www.medcom.id/olahraga/f1/Rb1Go1AK-angkat-trofi-juara-f1-verstappen-tujuan-hidup-saya-tercapai?utm_source=nasional&utm_medium=berita_lainnya&utm_campaign=detail_desktop",
+          img: "https://cdn.medcom.id/dynamic/content/2021/12/17/1365927/8rDWywRdG6.jpg?w=220",
+          imgAlt:
+            "Angkat Trofi Juara F1, Verstappen: Tujuan Hidup Saya Tercapai!",
+          title:
+            "Angkat Trofi Juara F1, Verstappen: Tujuan Hidup Saya Tercapai!",
+          category: {
+            url: "https://www.medcom.id/olahraga",
+            name: "olahraga",
+          },
+          topics: {
+            url: "https://www.medcom.id/tag/14692/satgas-covid-19",
+            name: "Satgas Covid 19",
+          },
+        },
+      ],
     },
   ];
 
@@ -80,6 +219,7 @@ $(document).ready(function () {
   let currentPage = 1;
   let totalNews = listNews.length;
   let lastScroll = 0;
+  let changeUrl = false;
 
   function loadFirstContent(countNews, textContainer, pageUrl) {
     let text = document.createElement("p");
@@ -88,7 +228,7 @@ $(document).ready(function () {
     text.style.marginBottom = "80px";
     text.classList.add("split-text");
     history.pushState(null, null, pageUrl);
-    $(".loader").css("display", "block");
+    $(".article").eq(currentNews).find($(".loader")).css("display", "block");
   }
 
   loadFirstContent(currentNews, articleText, listNews[currentNews].url);
@@ -133,20 +273,20 @@ $(document).ready(function () {
       currentPage++;
     }
 
-
-
     // LOAD BERITA BARU APABILA SUDAH SCROLL SAMPAI PALING BAWAH
     if (
-      scrollTop + $(this).height() === $(document).height()  &&
+      scrollTop + $(this).height() === $(document).height() &&
       currentNews < totalNews - 1
     ) {
-      
       $("load_new_news").css("display", "block");
       currentPage = 1;
       currentNews++;
 
       setTimeout(() => {
-        $('.article').eq(currentNews - 1).find('.loader').css('display', 'none')
+        $(".article")
+          .eq(currentNews - 1)
+          .find(".loader")
+          .css("display", "none");
         $(".load_new_news").css("display", "none");
         document.title = listNews[currentNews].title;
 
@@ -202,8 +342,9 @@ $(document).ready(function () {
 
         //SET CATEGORY
         let category = document.createElement("a");
-        category.setAttribute("title", "liga prancis");
-        category.innerText = "Olahraga";
+        category.setAttribute("href", listNews[currentNews].category.url);
+        category.setAttribute("title", listNews[currentNews].category.name);
+        category.innerText = listNews[currentNews].category.name;
         footArticle.append(category);
         contentContainer.append(footArticle);
 
@@ -213,11 +354,10 @@ $(document).ready(function () {
           let icon = document.createElement("i");
           icon.classList.add("fa", "fa-folder");
           topic.classList.add("topic");
-          topic.setAttribute("title", listNews[currentNews].topics[i]);
+          topic.setAttribute("title", listNews[currentNews].topics[i].name);
+          topic.setAttribute("href", listNews[currentNews].topics[i].url);
           topic.append(icon);
-          topic.append(` ${listNews[currentNews].topics[i]}`);
-          //SET TOPICS LINK
-          topic.setAttribute("href", "");
+          topic.append(` ${listNews[currentNews].topics[i].name}`);
           footArticle.append(topic);
         }
 
@@ -269,21 +409,111 @@ $(document).ready(function () {
         bottomArticle.append(listBottomArticle);
         contentContainer.append(bottomArticle);
 
-        // CREATE BOX COMMENT
-        let boxCommentContainer = document.createElement("div");
-        boxCommentContainer.classList.add("box_14", "comment_section");
-        let boxCommentTitleContainer = document.createElement("div");
-        boxCommentTitleContainer.classList.add("ti_1", "white");
-        let commentTitle = document.createElement("span");
-        commentTitle.innerText = "LEAVE A COMMENT";
+        // CLONE BOX COMMENT
+        let boxComment = document
+          .querySelector(".comment_section")
+          .cloneNode(true);
+        // let boxCommentContainer = document.createElement("div");
+        // boxCommentContainer.classList.add("box_14", "comment_section");
+        // let boxCommentTitleContainer = document.createElement("div");
+        // boxCommentTitleContainer.classList.add("ti_1", "white");
+        // let commentTitle = document.createElement("span");
+        // commentTitle.innerText = "LEAVE A COMMENT";
 
-        boxCommentTitleContainer.append(commentTitle);
-        boxCommentContainer.append(boxCommentTitleContainer);
-        article.append(boxCommentContainer);
+        // boxCommentTitleContainer.append(commentTitle);
+        // boxCommentContainer.append(boxCommentTitleContainer);
+        article.append(boxComment);
+
+        // CREATE BACA JUGA
+        let bacaJugaContainer = document.createElement("div");
+        bacaJugaContainer.classList.add("w100fl", "list_1");
+        bacaJugaContainer.setAttribute("id", "baca_juga");
+        let bacaJugaTitle = document.createElement("div");
+        bacaJugaTitle.classList.add("ti_1", "white");
+        let bacaJugaTitleText = document.createElement("span");
+        bacaJugaTitleText.innerText = "BACA JUGA";
+        let bacaJugaList = document.createElement("div");
+        bacaJugaList.classList.add("box_7");
+
+        for (let i = 0; i < listNews[currentNews].bacaJuga.length; i++) {
+          console.log(listNews[currentNews].bacaJuga[i].category);
+          let bacaJugaItem = document.createElement("div");
+          bacaJugaItem.classList.add("box_7_ct");
+
+          let picContainer = document.createElement("div");
+          picContainer.classList.add("pic");
+          let picLink = document.createElement("a");
+          picLink.setAttribute("href", listNews[currentNews].bacaJuga[i].url);
+          let pic = document.createElement("img");
+          pic.setAttribute("src", listNews[currentNews].bacaJuga[i].img);
+          pic.setAttribute("data-src", listNews[currentNews].bacaJuga[i].img);
+          pic.setAttribute("alt", listNews[currentNews].bacaJuga[i].title);
+
+          picLink.append(pic);
+          picContainer.append(picLink);
+
+          let textContainer = document.createElement("div");
+          textContainer.classList.add("text");
+
+          // JUDUL BERITA
+          let title = document.createElement("h3");
+          let linkTitle = document.createElement("a");
+          linkTitle.setAttribute("href", listNews[currentNews].bacaJuga[i].url);
+          linkTitle.innerText = listNews[currentNews].bacaJuga[i].title;
+          title.append(linkTitle);
+
+          // KATEGORI DAN TOPIK
+          let footArticle = document.createElement("div");
+          footArticle.classList.add("foot_article");
+          let category = document.createElement("a");
+          category.setAttribute(
+            "href",
+            listNews[currentNews].bacaJuga[i].category.url
+          );
+          category.innerText = listNews[currentNews].bacaJuga[i].category.name;
+
+          let topic = document.createElement("div");
+          topic.classList.add("bt_topic");
+          let topicIcon = document.createElement("i");
+          topicIcon.classList.add("fa", "fa-folder");
+          let topicLink = document.createElement("a");
+          topicLink.setAttribute(
+            "href",
+            listNews[currentNews].bacaJuga[i].topics.url
+          );
+          topicLink.append(topicIcon);
+          topicLink.append(` ${listNews[currentNews].bacaJuga[i].topics.name}`);
+
+          let buttonTopic = document.createElement("button");
+          buttonTopic.classList.add("bt_follow");
+          buttonTopic.setAttribute("data-action", "follow");
+          let buttonIcon = document.createElement("i");
+          buttonIcon.classList.add("fa", "fa-plus");
+          buttonTopic.append(buttonIcon);
+
+          topic.append(topicLink);
+          topic.append(buttonTopic);
+
+          footArticle.append(category);
+          footArticle.append(topic);
+
+          textContainer.append(title);
+          textContainer.append(footArticle);
+
+          bacaJugaItem.append(picContainer);
+          bacaJugaItem.append(textContainer);
+
+          bacaJugaList.append(bacaJugaItem);
+        }
+
+        bacaJugaTitle.append(bacaJugaTitleText);
+        bacaJugaContainer.append(bacaJugaTitle);
+        bacaJugaContainer.append(bacaJugaList);
 
         articleParent.append(article);
+        articleParent.append(bacaJugaContainer);
 
-        if (currentNews < totalNews) {
+        if (currentNews !== totalNews - 1) {
           // CREATE SKELETON LOAD NEW NEWS
           let skeletonLoadNewNews = document
             .querySelector(".load_new_news")
@@ -295,5 +525,30 @@ $(document).ready(function () {
         loadFirstContent(currentNews, textContent, listNews[currentNews].url);
       }, 500);
     }
+
+    // UBAH URL SESUAI BERITA APABILA USER SCROLL KE ATAS
+    if (currentNews > 0) {
+      console.log(
+        document
+          .querySelectorAll(".article")
+          [currentNews - 1].getBoundingClientRect().bottom 
+      );
+      if (
+        scrollTop < lastScroll && ocument
+        .querySelectorAll(".article")
+        [currentNews - 1].getBoundingClientRect().bottom  === 0 && changeUrl === false
+      ) {
+        
+        history.pushState(null, null, `${listNews[currentNews - 1].url}`);
+        changeUrl = false
+   
+      } else if (scrollTop > lastScroll) {
+        history.replaceState(null, null, `${listNews[currentNews].url}`);
+        document.title = listNews[currentNews].title;
+        console.log("scroll ke bawah");
+      }
+    }
+
+    lastScroll = scrollTop;
   });
 });
