@@ -79,22 +79,24 @@ $(document).ready(function () {
   let currentNews = 0;
   let currentPage = 1;
   let totalNews = listNews.length;
-  let changeUrl = false;
-  let lastPage = 0;
+  let viewFirstText = (changeUrl = true);
   let lastScroll = 0;
 
-  function loadFirstContent(countNews, textContainer, pageUrl) {
+  function loadFirstContent(countNews, textContainer, pageUrl, viewFirstText) {
     let text = document.createElement("p");
     $(text).text(listNews[countNews].listText[0]);
     textContainer.append(text);
     text.style.marginBottom = "80px";
     text.classList.add("split-text");
     history.pushState(null, null, pageUrl);
-
-    $(".loader").css("display", "block");
   }
 
-  loadFirstContent(currentNews, articleText, listNews[currentNews].url);
+  loadFirstContent(
+    currentNews,
+    articleText,
+    listNews[currentNews].url,
+    viewFirstText
+  );
 
   $(window).scroll(function () {
     let scrollTop = $(this).scrollTop();
@@ -102,6 +104,23 @@ $(document).ready(function () {
       $(".article").eq(currentNews).find(".article_ct .text").outerHeight() +
       200;
     let totalText = listNews[currentNews].listText.length;
+
+    // TAMBAH PAGE = 1 JIKA USER SCROLL KE TEKS PERTAMA
+    if (
+      document
+        .querySelectorAll(".article")
+        [currentNews].querySelector(".article_ct .text > .split-text")
+        .getBoundingClientRect().top < 900 &&
+      viewFirstText === true
+    ) {
+      history.pushState(
+        null,
+        null,
+        `${listNews[currentNews].url}?page=${currentPage}`
+      );
+      $(".loader").css("display", "block");
+      viewFirstText = false;
+    }
 
     // LOAD TEKS ARTIKEL SELANJUTNYA
     if (
@@ -114,7 +133,11 @@ $(document).ready(function () {
       currentPage < totalText
     ) {
       // CEK JIKA USER SCROLL KE BAWAH
-      if (scrollTop > lastScroll && lastPage !== currentPage) {
+
+      if (
+        $(".article").eq(currentNews).find(".split-text").length !==
+        listNews[currentNews].listText.length
+      ) {
         $(".article")
           .eq(currentNews)
           .find($(".article_ct .loader"))
@@ -131,7 +154,6 @@ $(document).ready(function () {
         history.pushState(null, null, `${url}?page=${currentPage + 1}`);
         if (currentPage === totalText - 1) {
           $(".loader").css("display", "none");
-
           $(".load_new_news").eq(currentNews).css("display", "block");
         }
 
@@ -300,28 +322,63 @@ $(document).ready(function () {
       }
 
       $(".load_new_news").css("display", "none");
-      loadFirstContent(currentNews, textContent, listNews[currentNews].url);
+      loadFirstContent(
+        currentNews,
+        textContent,
+        listNews[currentNews].url,
+        viewFirstText
+      );
     }
 
-    // UBAH URL APABILA USER SCROLL KEATAS LAGI
-    if (currentNews > 0) {
-      if (
-        scrollTop < lastScroll &&
-        document
-          .querySelectorAll(".article")
-          [currentNews - 1].getBoundingClientRect().bottom > 0 &&
-        changeUrl === false
-      ) {
-        currentNews--;
-        history.pushState(null, null, `${listNews[currentNews].url}`);
-      } else if (
-        scrollTop > lastScroll &&
-        document.querySelectorAll(".article")[currentNews].getBoundingClientRect
-          .top === 1
-      ) {
-        currentNews++;
-        history.pushState(null, null, `${listNews[currentNews].url}`);
-      }
+    // UBAH URL SESUAI DENGAN ARAH SCROLL
+    if ($(".article").length > 1) {
+      console.log(currentNews);
+
+      // let bottomPos = $(".article")
+      //   .eq(currentNews - 1)
+      //   .find(".article_ct .text")
+      //   .height();
+      // let topPos = $(".article")
+      //   .eq(currentNews)
+      //   .find(".article_ct")
+      //   .offset().top;
+
+      // console.log($(".article").eq(currentNews).find(".article_ct"));
+      // console.log("BOTTOM POS: " + bottomPos);
+      // console.log("SCROLL TOP: " + scrollTop);
+    
+      // if (scrollTop < lastScroll) {
+      //     // currentNews--;
+      //     // let bottomPos = $(".article")
+      //     //   .eq(currentNews - 1)
+      //     //   .find(".article_ct .text")
+      //     //   .height();
+
+      //     // console.log("bottom pos: " + bottomPos);
+      //     // console.log("scroll top: " + scrollTop);
+        
+      // }
+
+      // if (
+      //   scrollTop < lastScroll &&
+      //  scrollTop === bottomPos &&
+      //   changeUrl === true
+      // ) {
+      //   currentNews--;
+      //   history.pushState(null, null, `${listNews[currentNews].url}`);
+      //   changeUrl = false;
+      // } else if (
+      //   scrollTop > lastScroll &&
+      //   document
+      //     .querySelectorAll(".article")
+      //     [currentNews].querySelector(".article_ct .text")
+      //     .getBoundingClientRect().top < 800 &&
+      //   changeUrl === false
+      // ) {
+      //   currentNews++;
+      //   history.pushState(null, null, `${listNews[currentNews].url}`);
+      //   changeUrl = true;
+      // }
     }
 
     lastScroll = scrollTop;
