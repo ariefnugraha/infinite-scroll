@@ -77,10 +77,12 @@ $(document).ready(function () {
   let articleParent = $(".mid_content .lc_col");
   let articleText = document.querySelector(".article_ct .text");
   let currentNews = 0;
+  let newsPos = 0;
   let currentPage = 1;
   let totalNews = listNews.length;
   let viewFirstText = (toBottom = true);
   let lastScroll = 0;
+  let scrollFromTop = false;
 
   function loadFirstContent(countNews, textContainer, pageUrl, viewFirstText) {
     let text = document.createElement("p");
@@ -123,229 +125,250 @@ $(document).ready(function () {
       viewFirstText = false;
     }
 
-    
-
     // UBAH URL SESUAI DENGAN ARAH SCROLL
 
     if (scrollTop < lastScroll) {
-      let offsetTop = $(".article").eq(currentNews).offset().top - 600;
-
-      if (scrollTop < offsetTop) {
-        currentNews--;
+      let offsetTop = $(".article").eq(currentNews).offset().top - 1100;
+      if (scrollTop < offsetTop && currentNews > 0) {
+        currentNews--
         history.pushState(null, null, listNews[currentNews].url);
-        changeUrl = true;
+        document.title = listNews[currentNews].title;
+        scrollFromTop = true;
       }
     } else if (scrollTop > lastScroll) {
-      // LOAD TEKS ARTIKEL SELANJUTNYA
+      let offsetTop = $(".article").eq(currentNews).offset().top;
+
+      console.log(offsetTop)
+
       if (
-        scrollTop > articleTextOuterHeight &&
-        $(".article").eq(currentNews).find(".split-text").length > 0 &&
-        document
-          .querySelectorAll(".article")
-          [currentNews].querySelector(".article_ct .text")
-          .getBoundingClientRect().bottom < 500 &&
-        currentPage < totalText &&
-        toBottom === true
+        scrollFromTop &&
+        newsPos < currentNews &&
+        scrollTop + 200 > offsetTop
       ) {
-        // CEK APABILA SUDAH ADA TEKS BERITA ATAU BELUM DALAM ARTIKEL
+        history.pushState(null, null, listNews[currentNews].url);
+        document.title = listNews[currentNews].title;
+      }
+
+      if (
+        currentPage === listNews[currentNews].listText.length &&
+        $(".article").eq(currentNews + 1).length === 1
+      ) {
+        history.pushState(null, null, listNews[currentNews].url);
+        document.title = listNews[currentNews].title;
+      } else {
+        // LOAD TEKS ARTIKEL SELANJUTNYA
         if (
-          $(".article").eq(currentNews).find(".split-text").length !==
-          listNews[currentNews].listText.length
+          scrollTop > articleTextOuterHeight &&
+          $(".article").eq(currentNews).find(".split-text").length > 0 &&
+          document
+            .querySelectorAll(".article")
+            [currentNews].querySelector(".article_ct .text")
+            .getBoundingClientRect().bottom < 500 &&
+          currentPage < totalText &&
+          toBottom === true
         ) {
+
+          // CEK APABILA SUDAH ADA TEKS BERITA ATAU BELUM DALAM ARTIKEL
+          if (
+            $(".article").eq(currentNews).find(".split-text").length !==
+            listNews[currentNews].listText.length
+          ) {
+            $(".article")
+              .eq(currentNews)
+              .find($(".article_ct .loader"))
+              .css("display", "block");
+            let url = listNews[currentNews].url;
+            let text = document.createElement("p");
+            let textContainer = $(".article")
+              .eq(currentNews)
+              .find(".article_ct .text");
+            text.innerText = listNews[currentNews].listText[currentPage];
+            text.style.marginBottom = "80px";
+            text.classList.add("split-text");
+            textContainer.append(text);
+
+            history.pushState(null, null, `${url}?page=${currentPage + 1}`);
+
+            if (currentPage === totalText - 1) {
+              $(".loader").css("display", "none");
+              $(".load_new_news").eq(currentNews).css("display", "block");
+            }
+
+            currentPage++;
+          }
+        }
+
+        // LOAD BERITA BARU APABILA SUDAH SCROLL SAMPAI PALING BAWAH
+        if (
+          scrollTop + $(this).height() === $(document).height() &&
+          scrollTop > lastScroll &&
+          currentNews < totalNews - 1 &&
+          $(".article").eq(currentNews + 1).length === 0
+        ) {
+          $("load_new_news").css("display", "block");
+
+          lastPage = 0;
+          currentPage = 1;
+          currentNews++;
+
           $(".article")
-            .eq(currentNews)
-            .find($(".article_ct .loader"))
-            .css("display", "block");
-          let url = listNews[currentNews].url;
-          let text = document.createElement("p");
-          let textContainer = $(".article")
-            .eq(currentNews)
-            .find(".article_ct .text");
-          text.innerText = listNews[currentNews].listText[currentPage];
-          text.style.marginBottom = "80px";
-          text.classList.add("split-text");
-          textContainer.append(text);
-          history.pushState(null, null, `${url}?page=${currentPage + 1}`);
-          if (currentPage === totalText - 1) {
-            $(".loader").css("display", "none");
-            $(".load_new_news").eq(currentNews).css("display", "block");
+            .eq(currentNews - 1)
+            .find(".loader")
+            .css("display", "none");
+          $(".load_new_news").css("display", "none");
+          document.title = listNews[currentNews].title;
+
+          let article = document.createElement("div");
+          article.classList.add("article");
+
+          // BREADCRUMB
+          let breadcrumb = document.createElement("div");
+          breadcrumb.classList.add("breadcrumb");
+          let listBreadcrumb = document.createElement("ul");
+
+          for (let i = 0; i < listNews[currentNews].breadcrumb.length; i++) {
+            let breadcrumbItem = document.createElement("li");
+            let breadcrumbLink = document.createElement("a");
+            breadcrumbLink.innerText = listNews[currentNews].breadcrumb[i];
+            breadcrumbLink.setAttribute("href", "");
+            breadcrumbItem.append(breadcrumbLink);
+            listBreadcrumb.append(breadcrumbItem);
           }
 
-          currentPage++;
+          breadcrumb.append(listBreadcrumb);
+          article.append(breadcrumb);
+
+          // SHOWING NEWS IMAGE AND IMAGE CAPTION
+          let newsImageFigure = document.createElement("div");
+          newsImageFigure.classList.add("pic");
+          let newsImage = document.createElement("img");
+          newsImage.setAttribute("src", listNews[currentNews].imageSrc);
+          newsImage.setAttribute("alt", listNews[currentNews].imageAlt);
+          let newsImageCaption = document.createElement("div");
+          newsImageCaption.classList.add("caption");
+          newsImageCaption.innerText = listNews[currentNews].imageAlt;
+
+          newsImageFigure.append(newsImage);
+          newsImageFigure.append(newsImageCaption);
+          article.append(newsImageFigure);
+
+          let contentContainer = document.createElement("div");
+          contentContainer.classList.add("article_ct");
+
+          //NEWS TITLE AND SUBTITLE
+          let newsTitle = document.createElement("h1");
+          newsTitle.innerText = listNews[currentNews].title;
+          let newsSubtitle = document.createElement("h4");
+          newsSubtitle.classList.add("subtitle");
+          newsSubtitle.innerText = listNews[currentNews].subtitle;
+          contentContainer.append(newsSubtitle);
+          contentContainer.append(newsTitle);
+          article.append(contentContainer);
+
+          let footArticle = document.createElement("div");
+          footArticle.classList.add("foot_article");
+
+          //SET CATEGORY
+          let category = document.createElement("a");
+          category.setAttribute("title", "liga prancis");
+          category.innerText = "Olahraga";
+          footArticle.append(category);
+          contentContainer.append(footArticle);
+
+          // SET TOPICS
+          for (let i = 0; i < listNews[currentNews].topics.length; i++) {
+            let topic = document.createElement("a");
+            let icon = document.createElement("i");
+            icon.classList.add("fa", "fa-folder");
+            topic.classList.add("topic");
+            topic.setAttribute("title", listNews[currentNews].topics[i]);
+            topic.append(icon);
+            topic.append(` ${listNews[currentNews].topics[i]}`);
+            //SET TOPICS LINK
+            topic.setAttribute("href", "");
+            footArticle.append(topic);
+          }
+
+          let info = document.createElement("div");
+          info.classList.add("info");
+
+          // CREATE AUTHOR & DATE
+          let info_ct = document.createElement("div");
+          info_ct.classList.add("info_ct");
+          info_ct.innerText = `${listNews[currentNews].author} • ${listNews[currentNews].date}`;
+          info.append(info_ct);
+          contentContainer.append(info);
+
+          // CLONE TOOL SECTION
+          let tool = document.querySelector(".tool_bt").cloneNode(true);
+          info.append(tool);
+
+          // TEXT CONTENT
+          let textContent = document.createElement("div");
+          textContent.classList.add("text");
+
+          textContent.setAttribute("id", "articleBody");
+          textContent.setAttribute("itemprop", "articleBody");
+          contentContainer.append(textContent);
+
+          // CREATE LOADER ANIMATION
+          let getLoader = document.querySelector(".loader").cloneNode(true);
+          contentContainer.append(getLoader);
+
+          //SOCMED BUTTON
+          let socmed = document.getElementById("stickshare");
+          contentContainer.append(socmed);
+
+          //BOTTOM ARTICLE
+          let bottomArticle = document.createElement("div");
+          bottomArticle.classList.add("bottom_article");
+          let listBottomArticle = document.createElement("ul");
+          let itemBottomArticle = document.createElement("li");
+          let linkBottomArticle = document.createElement("a");
+          linkBottomArticle.innerText = listNews[currentNews].breadcrumb[2];
+          linkBottomArticle.setAttribute(
+            "title",
+            listNews[currentNews].breadcrumb[2]
+          );
+          linkBottomArticle.setAttribute("href", "");
+
+          itemBottomArticle.append(linkBottomArticle);
+          listBottomArticle.append(itemBottomArticle);
+          bottomArticle.append(listBottomArticle);
+          contentContainer.append(bottomArticle);
+
+          // CREATE BOX COMMENT
+          let boxCommentContainer = document.createElement("div");
+          boxCommentContainer.classList.add("box_14", "comment_section");
+          let boxCommentTitleContainer = document.createElement("div");
+          boxCommentTitleContainer.classList.add("ti_1", "white");
+          let commentTitle = document.createElement("span");
+          commentTitle.innerText = "LEAVE A COMMENT";
+
+          boxCommentTitleContainer.append(commentTitle);
+          boxCommentContainer.append(boxCommentTitleContainer);
+          article.append(boxCommentContainer);
+
+          articleParent.append(article);
+
+
+          if (currentNews != totalNews - 1) {
+            // CREATE SKELETON LOAD NEW NEWS
+            let skeletonLoadNewNews = document
+              .querySelector(".load_new_news")
+              .cloneNode(true);
+            articleParent.append(skeletonLoadNewNews);
+          }
+
+          $(".load_new_news").css("display", "none");
+          loadFirstContent(
+            currentNews,
+            textContent,
+            listNews[currentNews].url,
+            viewFirstText
+          );
         }
       }
-
-      // LOAD BERITA BARU APABILA SUDAH SCROLL SAMPAI PALING BAWAH
-      if (
-        scrollTop + $(this).height() === $(document).height() &&
-        scrollTop > lastScroll &&
-        currentNews < totalNews - 1 &&
-        $(".article").eq(currentNews + 1).length === 0
-      ) {
-        $("load_new_news").css("display", "block");
-
-        lastPage = 0;
-        currentPage = 1;
-        currentNews++;
-
-        $(".article")
-          .eq(currentNews - 1)
-          .find(".loader")
-          .css("display", "none");
-        $(".load_new_news").css("display", "none");
-        document.title = listNews[currentNews].title;
-
-        let article = document.createElement("div");
-        article.classList.add("article");
-
-        // BREADCRUMB
-        let breadcrumb = document.createElement("div");
-        breadcrumb.classList.add("breadcrumb");
-        let listBreadcrumb = document.createElement("ul");
-
-        for (let i = 0; i < listNews[currentNews].breadcrumb.length; i++) {
-          let breadcrumbItem = document.createElement("li");
-          let breadcrumbLink = document.createElement("a");
-          breadcrumbLink.innerText = listNews[currentNews].breadcrumb[i];
-          breadcrumbLink.setAttribute("href", "");
-          breadcrumbItem.append(breadcrumbLink);
-          listBreadcrumb.append(breadcrumbItem);
-        }
-
-        breadcrumb.append(listBreadcrumb);
-        article.append(breadcrumb);
-
-        // SHOWING NEWS IMAGE AND IMAGE CAPTION
-        let newsImageFigure = document.createElement("div");
-        newsImageFigure.classList.add("pic");
-        let newsImage = document.createElement("img");
-        newsImage.setAttribute("src", listNews[currentNews].imageSrc);
-        newsImage.setAttribute("alt", listNews[currentNews].imageAlt);
-        let newsImageCaption = document.createElement("div");
-        newsImageCaption.classList.add("caption");
-        newsImageCaption.innerText = listNews[currentNews].imageAlt;
-
-        newsImageFigure.append(newsImage);
-        newsImageFigure.append(newsImageCaption);
-        article.append(newsImageFigure);
-
-        let contentContainer = document.createElement("div");
-        contentContainer.classList.add("article_ct");
-
-        //NEWS TITLE AND SUBTITLE
-        let newsTitle = document.createElement("h1");
-        newsTitle.innerText = listNews[currentNews].title;
-        let newsSubtitle = document.createElement("h4");
-        newsSubtitle.classList.add("subtitle");
-        newsSubtitle.innerText = listNews[currentNews].subtitle;
-        contentContainer.append(newsSubtitle);
-        contentContainer.append(newsTitle);
-        article.append(contentContainer);
-
-        let footArticle = document.createElement("div");
-        footArticle.classList.add("foot_article");
-
-        //SET CATEGORY
-        let category = document.createElement("a");
-        category.setAttribute("title", "liga prancis");
-        category.innerText = "Olahraga";
-        footArticle.append(category);
-        contentContainer.append(footArticle);
-
-        // SET TOPICS
-        for (let i = 0; i < listNews[currentNews].topics.length; i++) {
-          let topic = document.createElement("a");
-          let icon = document.createElement("i");
-          icon.classList.add("fa", "fa-folder");
-          topic.classList.add("topic");
-          topic.setAttribute("title", listNews[currentNews].topics[i]);
-          topic.append(icon);
-          topic.append(` ${listNews[currentNews].topics[i]}`);
-          //SET TOPICS LINK
-          topic.setAttribute("href", "");
-          footArticle.append(topic);
-        }
-
-        let info = document.createElement("div");
-        info.classList.add("info");
-
-        // CREATE AUTHOR & DATE
-        let info_ct = document.createElement("div");
-        info_ct.classList.add("info_ct");
-        info_ct.innerText = `${listNews[currentNews].author} • ${listNews[currentNews].date}`;
-        info.append(info_ct);
-        contentContainer.append(info);
-
-        // CLONE TOOL SECTION
-        let tool = document.querySelector(".tool_bt").cloneNode(true);
-        info.append(tool);
-
-        // TEXT CONTENT
-        let textContent = document.createElement("div");
-        textContent.classList.add("text");
-
-        textContent.setAttribute("id", "articleBody");
-        textContent.setAttribute("itemprop", "articleBody");
-        contentContainer.append(textContent);
-
-        // CREATE LOADER ANIMATION
-        let getLoader = document.querySelector(".loader").cloneNode(true);
-        contentContainer.append(getLoader);
-
-        //SOCMED BUTTON
-        let socmed = document.getElementById("stickshare");
-        contentContainer.append(socmed);
-
-        //BOTTOM ARTICLE
-        let bottomArticle = document.createElement("div");
-        bottomArticle.classList.add("bottom_article");
-        let listBottomArticle = document.createElement("ul");
-        let itemBottomArticle = document.createElement("li");
-        let linkBottomArticle = document.createElement("a");
-        linkBottomArticle.innerText = listNews[currentNews].breadcrumb[2];
-        linkBottomArticle.setAttribute(
-          "title",
-          listNews[currentNews].breadcrumb[2]
-        );
-        linkBottomArticle.setAttribute("href", "");
-
-        itemBottomArticle.append(linkBottomArticle);
-        listBottomArticle.append(itemBottomArticle);
-        bottomArticle.append(listBottomArticle);
-        contentContainer.append(bottomArticle);
-
-        // CREATE BOX COMMENT
-        let boxCommentContainer = document.createElement("div");
-        boxCommentContainer.classList.add("box_14", "comment_section");
-        let boxCommentTitleContainer = document.createElement("div");
-        boxCommentTitleContainer.classList.add("ti_1", "white");
-        let commentTitle = document.createElement("span");
-        commentTitle.innerText = "LEAVE A COMMENT";
-
-        boxCommentTitleContainer.append(commentTitle);
-        boxCommentContainer.append(boxCommentTitleContainer);
-        article.append(boxCommentContainer);
-
-        articleParent.append(article);
-
-        if (currentNews != totalNews - 1) {
-          // CREATE SKELETON LOAD NEW NEWS
-          let skeletonLoadNewNews = document
-            .querySelector(".load_new_news")
-            .cloneNode(true);
-          articleParent.append(skeletonLoadNewNews);
-        }
-
-        $(".load_new_news").css("display", "none");
-        loadFirstContent(
-          currentNews,
-          textContent,
-          listNews[currentNews].url,
-          viewFirstText
-        );
-      }
-
-      console.log($('.article').eq(currentNews))
     }
 
     lastScroll = scrollTop;
