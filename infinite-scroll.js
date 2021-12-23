@@ -65,11 +65,11 @@ $(document).ready(function () {
       imageSrc:
         "https://cdn.medcom.id/dynamic/content/2021/12/15/1365038/djzxCAHpiq.jpg?w=1024",
       listText: [
-        "Jakarta: Presiden Joko Widodo (Jokowi) menyebut Indonesia memiliki potensi pasar digital yang sangat besar dan berkembang cepat. Peluang itu diharap dapat dimanfaatkan sebaik-baiknya untuk kesejahteraan masyarakat dan kemajuan negara.",
-        `"Potensi pasar kita ini besar. Ini harus dimanfaatkan. Jangan sampai yang mengambil nanti orang lain," kata Jokowi dalam peresmian Gerakan Akselerasi Generasi Digital di Jakarta Convention Center (JCC), Jakarta, Rabu, 15 Desember 2021.`,
-        "Menurut Jokowi, Indonesia memiliki 2.319 startup. Tujuh di antaranya sudah berstatus unicorn dan satu sudah menyentuh decacorn.",
-        "Kepala Negara meminta semua itu didukung dengan berbagai kebijakan yang tepat. Salah satunya, melalui pengembangan ekosistem digital.",
-        `"Ini sudah kejar-kejaran. Begitu kita tidak bisa melangkah, tidak bisa mengejar, ya sudah, kita akan semakin jauh ketinggalan," kata Jokowi.`,
+        "It really shouldn't have mattered to Betty. That's what she kept trying to convince herself even if she knew it mattered to Betty more than practically anything else. Why was she trying to convince herself otherwise? As she stepped forward to knock on Betty's door, she still didn't have a convincing answer to this question that she'd been asking herself for more than two years now.",
+        `The time to take action was now. All three men knew in their hearts this was the case, yet none of them moved a muscle to try. They were all watching and waiting for one of the others to make the first move so they could follow a step or two behind and help. The situation demanded a leader and all three men were followers.`,
+        "One dollar and eighty-seven cents. That was all. And sixty cents of it was in pennies. Pennies saved one and two at a time by bulldozing the grocer and the vegetable man and the butcher until one’s cheeks burned with the silent imputation of parsimony that such close dealing implied. One dollar and eighty-seven cents. And the next day would be Christmas...",
+        `"I'll talk to you tomorrow in more detail at our meeting, but I think I've found a solution to our problem. It's not exactly legal, but it won't land us in jail for the rest of our lives either. Are you willing to take the chance?" Monroe asked his partner over the phone.`,
+        `Samantha wanted to be famous. The problem was that she had never considered all the downsides to actually being famous. Had she taken the time to objectively consider these downsides, she would have never agreed to publically sing that first song. He dropped the ball. While most people would think that this was a metaphor of some type, in Joe's case it was absolutely literal. He had hopes of reaching the Major League and that dream was now it great jeopardy. All because he had dropped the ball. It seemed like it should have been so simple. There was nothing inherently difficult with getting the project done. It was simple and straightforward enough that even a child should have been able to complete it on time, but that wasn't the case. The deadline had arrived and the project remained unfinished.`,
       ],
     },
   ];
@@ -77,7 +77,7 @@ $(document).ready(function () {
   let articleParent = $(".mid_content .lc_col");
   let articleText = document.querySelector(".article_ct .text");
   let currentNews = 0;
-  let newsPos = 0;
+  let oldNews = 0;
   let currentPage = 1;
   let totalNews = listNews.length;
   let viewFirstText = (toBottom = true);
@@ -108,269 +108,282 @@ $(document).ready(function () {
     let totalText = listNews[currentNews].listText.length;
 
     // TAMBAH PAGE = 1 JIKA USER SCROLL KE TEKS PERTAMA
-    if (
-      document
-        .querySelectorAll(".article")
-        [currentNews].querySelector(".article_ct .text > .split-text")
-        .getBoundingClientRect().top < 900 &&
-      viewFirstText === true &&
-      toBottom === true
-    ) {
-      history.pushState(
-        null,
-        null,
-        `${listNews[currentNews].url}?page=${currentPage}`
-      );
-      $(".loader").css("display", "block");
-      viewFirstText = false;
-    }
+    // if (
+    //   document
+    //     .querySelectorAll(".article")
+    //     [currentNews].querySelector(".article_ct .text > .split-text")
+    //     .getBoundingClientRect().top < 900 &&
+    //   viewFirstText === true &&
+    //   toBottom === true &&
+    //   scrollTop > lastScroll
+    // ) {
+    //   history.pushState(
+    //     null,
+    //     null,
+    //     `${listNews[currentNews].url}?page=${currentPage}`
+    //   );
+    //   $(".loader").css("display", "block");
+    //   viewFirstText = false;
+    // }
 
     // UBAH URL SESUAI DENGAN ARAH SCROLL
 
     if (scrollTop < lastScroll) {
-      let offsetTop = $(".article").eq(currentNews).offset().top - 1100;
+      let offsetTop = $(".article-content").eq(currentNews).offset().top - 1100;
+
       if (scrollTop < offsetTop && currentNews > 0) {
-        currentNews--
+        currentNews--;
         history.pushState(null, null, listNews[currentNews].url);
         document.title = listNews[currentNews].title;
         scrollFromTop = true;
       }
     } else if (scrollTop > lastScroll) {
-      let offsetTop = $(".article").eq(currentNews).offset().top;
+      let loadNews = $('.article-content').eq(currentNews).find('.load_new_news');
 
-      console.log(offsetTop)
+      if(scrollFromTop === true && loadNews.css('display') === 'none') {
+        currentNews++;
+        console.log(currentNews)
+      }
+      // let elHeight = $(".article-content").eq(currentNews).height() - 900;
+      // let elHeightPlus = elHeight + 100;
+      // // console.log("height: " + elHeight);
 
+      // if (
+      //   scrollTop > elHeight &&
+      //   scrollTop < elHeightPlus &&
+      //   scrollFromTop === true
+      // ) {
+        
+      //   currentNews++;
+      //   elHeight =
+      //     $(".article-content")
+      //       .eq(currentNews + 1)
+      //       .height() - 900;
+      //   elHeightPlus = elHeight + 100;
+      //   history.pushState(null, null, listNews[currentNews].url);
+      //   document.title = listNews[currentNews].title;
+      //   console.log(currentNews);
+      // }
+
+      // LOAD TEKS ARTIKEL SELANJUTNYA
       if (
-        scrollFromTop &&
-        newsPos < currentNews &&
-        scrollTop + 200 > offsetTop
+        scrollTop > articleTextOuterHeight &&
+        $(".article").eq(currentNews).find(".split-text").length > 0 &&
+        document
+          .querySelectorAll(".article")
+          [currentNews].querySelector(".article_ct .text")
+          .getBoundingClientRect().bottom < 500 &&
+        currentPage < totalText &&
+        toBottom === true
       ) {
-        history.pushState(null, null, listNews[currentNews].url);
-        document.title = listNews[currentNews].title;
+        // CEK APABILA SUDAH ADA TEKS BERITA ATAU BELUM DALAM ARTIKEL
+        if (
+          $(".article").eq(currentNews).find(".split-text").length !==
+          listNews[currentNews].listText.length
+        ) {
+          $(".article")
+            .eq(currentNews)
+            .find($(".article_ct .loader"))
+            .css("display", "block");
+          let url = listNews[currentNews].url;
+          let text = document.createElement("p");
+          let textContainer = $(".article")
+            .eq(currentNews)
+            .find(".article_ct .text");
+          text.innerText = listNews[currentNews].listText[currentPage];
+          text.style.marginBottom = "80px";
+          text.classList.add("split-text");
+          textContainer.append(text);
+
+          history.pushState(null, null, `${url}?page=${currentPage + 1}`);
+
+          if (currentPage === totalText - 1) {
+            $(".loader").css("display", "none");
+            $(".load_new_news").eq(currentNews).css("display", "block");
+          }
+
+          currentPage++;
+        }
       }
 
+      // LOAD BERITA BARU APABILA SUDAH SCROLL SAMPAI PALING BAWAH
       if (
-        currentPage === listNews[currentNews].listText.length &&
-        $(".article").eq(currentNews + 1).length === 1
+        scrollTop + $(this).height() === $(document).height() &&
+        scrollTop > lastScroll &&
+        currentNews < totalNews - 1 &&
+        $(".article").eq(currentNews + 1).length === 0
       ) {
-        history.pushState(null, null, listNews[currentNews].url);
+        $("load_new_news").css("display", "block");
+
+        lastPage = 0;
+        currentPage = 1;
+        currentNews++;
+
+        $(".article")
+          .eq(currentNews - 1)
+          .find(".loader")
+          .css("display", "none");
+        $(".load_new_news").css("display", "none");
         document.title = listNews[currentNews].title;
-      } else {
-        // LOAD TEKS ARTIKEL SELANJUTNYA
-        if (
-          scrollTop > articleTextOuterHeight &&
-          $(".article").eq(currentNews).find(".split-text").length > 0 &&
-          document
-            .querySelectorAll(".article")
-            [currentNews].querySelector(".article_ct .text")
-            .getBoundingClientRect().bottom < 500 &&
-          currentPage < totalText &&
-          toBottom === true
-        ) {
 
-          // CEK APABILA SUDAH ADA TEKS BERITA ATAU BELUM DALAM ARTIKEL
-          if (
-            $(".article").eq(currentNews).find(".split-text").length !==
-            listNews[currentNews].listText.length
-          ) {
-            $(".article")
-              .eq(currentNews)
-              .find($(".article_ct .loader"))
-              .css("display", "block");
-            let url = listNews[currentNews].url;
-            let text = document.createElement("p");
-            let textContainer = $(".article")
-              .eq(currentNews)
-              .find(".article_ct .text");
-            text.innerText = listNews[currentNews].listText[currentPage];
-            text.style.marginBottom = "80px";
-            text.classList.add("split-text");
-            textContainer.append(text);
+        let articleContent = document.createElement("div");
+        articleContent.classList.add("article-content", "w100fl");
 
-            history.pushState(null, null, `${url}?page=${currentPage + 1}`);
+        let article = document.createElement("div");
+        article.classList.add("article");
 
-            if (currentPage === totalText - 1) {
-              $(".loader").css("display", "none");
-              $(".load_new_news").eq(currentNews).css("display", "block");
-            }
+        // BREADCRUMB
+        let breadcrumb = document.createElement("div");
+        breadcrumb.classList.add("breadcrumb");
+        let listBreadcrumb = document.createElement("ul");
 
-            currentPage++;
-          }
+        for (let i = 0; i < listNews[currentNews].breadcrumb.length; i++) {
+          let breadcrumbItem = document.createElement("li");
+          let breadcrumbLink = document.createElement("a");
+          breadcrumbLink.innerText = listNews[currentNews].breadcrumb[i];
+          breadcrumbLink.setAttribute("href", "");
+          breadcrumbItem.append(breadcrumbLink);
+          listBreadcrumb.append(breadcrumbItem);
         }
 
-        // LOAD BERITA BARU APABILA SUDAH SCROLL SAMPAI PALING BAWAH
-        if (
-          scrollTop + $(this).height() === $(document).height() &&
-          scrollTop > lastScroll &&
-          currentNews < totalNews - 1 &&
-          $(".article").eq(currentNews + 1).length === 0
-        ) {
-          $("load_new_news").css("display", "block");
+        breadcrumb.append(listBreadcrumb);
+        article.append(breadcrumb);
 
-          lastPage = 0;
-          currentPage = 1;
-          currentNews++;
+        // SHOWING NEWS IMAGE AND IMAGE CAPTION
+        let newsImageFigure = document.createElement("div");
+        newsImageFigure.classList.add("pic");
+        let newsImage = document.createElement("img");
+        newsImage.setAttribute("src", listNews[currentNews].imageSrc);
+        newsImage.setAttribute("alt", listNews[currentNews].imageAlt);
+        let newsImageCaption = document.createElement("div");
+        newsImageCaption.classList.add("caption");
+        newsImageCaption.innerText = listNews[currentNews].imageAlt;
 
-          $(".article")
-            .eq(currentNews - 1)
-            .find(".loader")
-            .css("display", "none");
-          $(".load_new_news").css("display", "none");
-          document.title = listNews[currentNews].title;
+        newsImageFigure.append(newsImage);
+        newsImageFigure.append(newsImageCaption);
+        article.append(newsImageFigure);
 
-          let article = document.createElement("div");
-          article.classList.add("article");
+        let contentContainer = document.createElement("div");
+        contentContainer.classList.add("article_ct");
 
-          // BREADCRUMB
-          let breadcrumb = document.createElement("div");
-          breadcrumb.classList.add("breadcrumb");
-          let listBreadcrumb = document.createElement("ul");
+        //NEWS TITLE AND SUBTITLE
+        let newsTitle = document.createElement("h1");
+        newsTitle.innerText = listNews[currentNews].title;
+        let newsSubtitle = document.createElement("h4");
+        newsSubtitle.classList.add("subtitle");
+        newsSubtitle.innerText = listNews[currentNews].subtitle;
+        contentContainer.append(newsSubtitle);
+        contentContainer.append(newsTitle);
+        article.append(contentContainer);
 
-          for (let i = 0; i < listNews[currentNews].breadcrumb.length; i++) {
-            let breadcrumbItem = document.createElement("li");
-            let breadcrumbLink = document.createElement("a");
-            breadcrumbLink.innerText = listNews[currentNews].breadcrumb[i];
-            breadcrumbLink.setAttribute("href", "");
-            breadcrumbItem.append(breadcrumbLink);
-            listBreadcrumb.append(breadcrumbItem);
-          }
+        let footArticle = document.createElement("div");
+        footArticle.classList.add("foot_article");
 
-          breadcrumb.append(listBreadcrumb);
-          article.append(breadcrumb);
+        //SET CATEGORY
+        let category = document.createElement("a");
+        category.setAttribute("title", "liga prancis");
+        category.innerText = "Olahraga";
+        footArticle.append(category);
+        contentContainer.append(footArticle);
 
-          // SHOWING NEWS IMAGE AND IMAGE CAPTION
-          let newsImageFigure = document.createElement("div");
-          newsImageFigure.classList.add("pic");
-          let newsImage = document.createElement("img");
-          newsImage.setAttribute("src", listNews[currentNews].imageSrc);
-          newsImage.setAttribute("alt", listNews[currentNews].imageAlt);
-          let newsImageCaption = document.createElement("div");
-          newsImageCaption.classList.add("caption");
-          newsImageCaption.innerText = listNews[currentNews].imageAlt;
-
-          newsImageFigure.append(newsImage);
-          newsImageFigure.append(newsImageCaption);
-          article.append(newsImageFigure);
-
-          let contentContainer = document.createElement("div");
-          contentContainer.classList.add("article_ct");
-
-          //NEWS TITLE AND SUBTITLE
-          let newsTitle = document.createElement("h1");
-          newsTitle.innerText = listNews[currentNews].title;
-          let newsSubtitle = document.createElement("h4");
-          newsSubtitle.classList.add("subtitle");
-          newsSubtitle.innerText = listNews[currentNews].subtitle;
-          contentContainer.append(newsSubtitle);
-          contentContainer.append(newsTitle);
-          article.append(contentContainer);
-
-          let footArticle = document.createElement("div");
-          footArticle.classList.add("foot_article");
-
-          //SET CATEGORY
-          let category = document.createElement("a");
-          category.setAttribute("title", "liga prancis");
-          category.innerText = "Olahraga";
-          footArticle.append(category);
-          contentContainer.append(footArticle);
-
-          // SET TOPICS
-          for (let i = 0; i < listNews[currentNews].topics.length; i++) {
-            let topic = document.createElement("a");
-            let icon = document.createElement("i");
-            icon.classList.add("fa", "fa-folder");
-            topic.classList.add("topic");
-            topic.setAttribute("title", listNews[currentNews].topics[i]);
-            topic.append(icon);
-            topic.append(` ${listNews[currentNews].topics[i]}`);
-            //SET TOPICS LINK
-            topic.setAttribute("href", "");
-            footArticle.append(topic);
-          }
-
-          let info = document.createElement("div");
-          info.classList.add("info");
-
-          // CREATE AUTHOR & DATE
-          let info_ct = document.createElement("div");
-          info_ct.classList.add("info_ct");
-          info_ct.innerText = `${listNews[currentNews].author} • ${listNews[currentNews].date}`;
-          info.append(info_ct);
-          contentContainer.append(info);
-
-          // CLONE TOOL SECTION
-          let tool = document.querySelector(".tool_bt").cloneNode(true);
-          info.append(tool);
-
-          // TEXT CONTENT
-          let textContent = document.createElement("div");
-          textContent.classList.add("text");
-
-          textContent.setAttribute("id", "articleBody");
-          textContent.setAttribute("itemprop", "articleBody");
-          contentContainer.append(textContent);
-
-          // CREATE LOADER ANIMATION
-          let getLoader = document.querySelector(".loader").cloneNode(true);
-          contentContainer.append(getLoader);
-
-          //SOCMED BUTTON
-          let socmed = document.getElementById("stickshare");
-          contentContainer.append(socmed);
-
-          //BOTTOM ARTICLE
-          let bottomArticle = document.createElement("div");
-          bottomArticle.classList.add("bottom_article");
-          let listBottomArticle = document.createElement("ul");
-          let itemBottomArticle = document.createElement("li");
-          let linkBottomArticle = document.createElement("a");
-          linkBottomArticle.innerText = listNews[currentNews].breadcrumb[2];
-          linkBottomArticle.setAttribute(
-            "title",
-            listNews[currentNews].breadcrumb[2]
-          );
-          linkBottomArticle.setAttribute("href", "");
-
-          itemBottomArticle.append(linkBottomArticle);
-          listBottomArticle.append(itemBottomArticle);
-          bottomArticle.append(listBottomArticle);
-          contentContainer.append(bottomArticle);
-
-          // CREATE BOX COMMENT
-          let boxCommentContainer = document.createElement("div");
-          boxCommentContainer.classList.add("box_14", "comment_section");
-          let boxCommentTitleContainer = document.createElement("div");
-          boxCommentTitleContainer.classList.add("ti_1", "white");
-          let commentTitle = document.createElement("span");
-          commentTitle.innerText = "LEAVE A COMMENT";
-
-          boxCommentTitleContainer.append(commentTitle);
-          boxCommentContainer.append(boxCommentTitleContainer);
-          article.append(boxCommentContainer);
-
-          articleParent.append(article);
-
-
-          if (currentNews != totalNews - 1) {
-            // CREATE SKELETON LOAD NEW NEWS
-            let skeletonLoadNewNews = document
-              .querySelector(".load_new_news")
-              .cloneNode(true);
-            articleParent.append(skeletonLoadNewNews);
-          }
-
-          $(".load_new_news").css("display", "none");
-          loadFirstContent(
-            currentNews,
-            textContent,
-            listNews[currentNews].url,
-            viewFirstText
-          );
+        // SET TOPICS
+        for (let i = 0; i < listNews[currentNews].topics.length; i++) {
+          let topic = document.createElement("a");
+          let icon = document.createElement("i");
+          icon.classList.add("fa", "fa-folder");
+          topic.classList.add("topic");
+          topic.setAttribute("title", listNews[currentNews].topics[i]);
+          topic.append(icon);
+          topic.append(` ${listNews[currentNews].topics[i]}`);
+          //SET TOPICS LINK
+          topic.setAttribute("href", "");
+          footArticle.append(topic);
         }
+
+        let info = document.createElement("div");
+        info.classList.add("info");
+
+        // CREATE AUTHOR & DATE
+        let info_ct = document.createElement("div");
+        info_ct.classList.add("info_ct");
+        info_ct.innerText = `${listNews[currentNews].author} • ${listNews[currentNews].date}`;
+        info.append(info_ct);
+        contentContainer.append(info);
+
+        // CLONE TOOL SECTION
+        let tool = document.querySelector(".tool_bt").cloneNode(true);
+        info.append(tool);
+
+        // TEXT CONTENT
+        let textContent = document.createElement("div");
+        textContent.classList.add("text");
+
+        textContent.setAttribute("id", "articleBody");
+        textContent.setAttribute("itemprop", "articleBody");
+        contentContainer.append(textContent);
+
+        // CREATE LOADER ANIMATION
+        let getLoader = document.querySelector(".loader").cloneNode(true);
+        contentContainer.append(getLoader);
+
+        //SOCMED BUTTON
+        let socmed = document.getElementById("stickshare");
+        contentContainer.append(socmed);
+
+        //BOTTOM ARTICLE
+        let bottomArticle = document.createElement("div");
+        bottomArticle.classList.add("bottom_article");
+        let listBottomArticle = document.createElement("ul");
+        let itemBottomArticle = document.createElement("li");
+        let linkBottomArticle = document.createElement("a");
+        linkBottomArticle.innerText = listNews[currentNews].breadcrumb[2];
+        linkBottomArticle.setAttribute(
+          "title",
+          listNews[currentNews].breadcrumb[2]
+        );
+        linkBottomArticle.setAttribute("href", "");
+
+        itemBottomArticle.append(linkBottomArticle);
+        listBottomArticle.append(itemBottomArticle);
+        bottomArticle.append(listBottomArticle);
+        contentContainer.append(bottomArticle);
+
+        // CREATE BOX COMMENT
+        // let boxCommentContainer = document.createElement("div");
+        // boxCommentContainer.classList.add("box_14", "comment_section");
+        // let boxCommentTitleContainer = document.createElement("div");
+        // boxCommentTitleContainer.classList.add("ti_1", "white");
+        // let commentTitle = document.createElement("span");
+        // commentTitle.innerText = "LEAVE A COMMENT";
+
+        // boxCommentTitleContainer.append(commentTitle);
+        // boxCommentContainer.append(boxCommentTitleContainer);
+        // article.append(boxCommentContainer);
+        let cloneBoxComment = document
+          .querySelector(".comment_section")
+          .cloneNode(true);
+        article.append(cloneBoxComment);
+        articleContent.append(article);
+
+        articleParent.append(articleContent);
+
+        if (currentNews != totalNews - 1) {
+          // CREATE SKELETON LOAD NEW NEWS
+          let skeletonLoadNewNews = document
+            .querySelector(".load_new_news")
+            .cloneNode(true);
+          articleContent.append(skeletonLoadNewNews);
+        }
+
+        $(".load_new_news").css("display", "none");
+        loadFirstContent(
+          currentNews,
+          textContent,
+          listNews[currentNews].url,
+          viewFirstText
+        );
       }
     }
-
     lastScroll = scrollTop;
   });
 });
