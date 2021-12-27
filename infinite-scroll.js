@@ -80,7 +80,7 @@ $(document).ready(function () {
   let oldNews = 0;
   let currentPage = 1;
   let totalNews = listNews.length;
-  let viewFirstText = (toBottom = true);
+  let viewFirstText = true;
   let lastScroll = 0;
   let scrollFromTop = false;
 
@@ -107,27 +107,7 @@ $(document).ready(function () {
       200;
     let totalText = listNews[currentNews].listText.length;
 
-    // TAMBAH PAGE = 1 JIKA USER SCROLL KE TEKS PERTAMA
-    // if (
-    //   document
-    //     .querySelectorAll(".article")
-    //     [currentNews].querySelector(".article_ct .text > .split-text")
-    //     .getBoundingClientRect().top < 900 &&
-    //   viewFirstText === true &&
-    //   toBottom === true &&
-    //   scrollTop > lastScroll
-    // ) {
-    //   history.pushState(
-    //     null,
-    //     null,
-    //     `${listNews[currentNews].url}?page=${currentPage}`
-    //   );
-    //   $(".loader").css("display", "block");
-    //   viewFirstText = false;
-    // }
-
     // UBAH URL SESUAI DENGAN ARAH SCROLL
-
     if (scrollTop < lastScroll) {
       let offsetTop = $(".article-content").eq(currentNews).offset().top - 1100;
 
@@ -138,32 +118,38 @@ $(document).ready(function () {
         scrollFromTop = true;
       }
     } else if (scrollTop > lastScroll) {
-      let loadNews = $('.article-content').eq(currentNews).find('.load_new_news');
+      // CEK JIKA USER SCROLL KEMBALI KE BERITA SEBELUMNYA
+      if (scrollFromTop === true) {
+        let bottomPosition = document
+          .querySelectorAll(".article-content")
+          [currentNews].getBoundingClientRect().bottom;
 
-      if(scrollFromTop === true && loadNews.css('display') === 'none') {
-        currentNews++;
-        console.log(currentNews)
+        if (bottomPosition > 500 && bottomPosition < 700) {
+          currentNews++;
+          history.pushState(null, null, listNews[currentNews].url);
+          document.title = listNews[currentNews].title;
+        }
       }
-      // let elHeight = $(".article-content").eq(currentNews).height() - 900;
-      // let elHeightPlus = elHeight + 100;
-      // // console.log("height: " + elHeight);
 
-      // if (
-      //   scrollTop > elHeight &&
-      //   scrollTop < elHeightPlus &&
-      //   scrollFromTop === true
-      // ) {
-        
-      //   currentNews++;
-      //   elHeight =
-      //     $(".article-content")
-      //       .eq(currentNews + 1)
-      //       .height() - 900;
-      //   elHeightPlus = elHeight + 100;
-      //   history.pushState(null, null, listNews[currentNews].url);
-      //   document.title = listNews[currentNews].title;
-      //   console.log(currentNews);
-      // }
+      // TAMBAH ?page=1 di URL JIKA USER SCROLL KE TEKS PERTAMA
+      if (
+        document
+          .querySelectorAll(".article")
+          [currentNews].querySelector(".article_ct .text > .split-text")
+          .getBoundingClientRect().top > 600 &&
+        document
+          .querySelectorAll(".article")
+          [currentNews].querySelector(".article_ct .text > .split-text")
+          .getBoundingClientRect().top < 900
+      ) {
+        history.pushState(
+          null,
+          null,
+          `${listNews[currentNews].url}?page=${currentPage}`
+        );
+        $(".loader").css("display", "block");
+        viewFirstText = false;
+      }
 
       // LOAD TEKS ARTIKEL SELANJUTNYA
       if (
@@ -173,8 +159,7 @@ $(document).ready(function () {
           .querySelectorAll(".article")
           [currentNews].querySelector(".article_ct .text")
           .getBoundingClientRect().bottom < 500 &&
-        currentPage < totalText &&
-        toBottom === true
+        currentPage < totalText
       ) {
         // CEK APABILA SUDAH ADA TEKS BERITA ATAU BELUM DALAM ARTIKEL
         if (
