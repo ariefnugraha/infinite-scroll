@@ -146,7 +146,7 @@ $(document).ready(function () {
           null,
           `${listNews[currentNews].url}?page=${currentPage}`
         );
-        $('.article-content').find(".loader").css("display", "block");
+        $('.article-content').eq(currentNews).find(".loader").css("display", "block");
         viewFirstText = false;
       }
 
@@ -160,15 +160,14 @@ $(document).ready(function () {
           .getBoundingClientRect().bottom < 500 &&
         currentPage < totalText
       ) {
+
         // CEK APABILA SUDAH ADA TEKS BERITA ATAU BELUM DALAM ARTIKEL
         if (
           $(".article").eq(currentNews).find(".split-text").length !==
           listNews[currentNews].listText.length
         ) {
-          $(".article")
-            .eq(currentNews)
-            .find($(".article_ct .loader"))
-            .css("display", "block");
+          
+
           let url = listNews[currentNews].url;
           let text = document.createElement("p");
           let textContainer = $(".article")
@@ -179,6 +178,11 @@ $(document).ready(function () {
           text.classList.add("split-text");
           textContainer.append(text);
 
+          
+          $(".article")
+          .eq(currentNews)
+          .find($(".article_ct .loader"))
+          .css("display", "block");
           history.pushState(null, null, `${url}?page=${currentPage + 1}`);
 
           if (currentPage === totalText - 1) {
