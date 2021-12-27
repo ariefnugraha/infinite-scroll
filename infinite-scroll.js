@@ -146,7 +146,7 @@ $(document).ready(function () {
           null,
           `${listNews[currentNews].url}?page=${currentPage}`
         );
-        $(".loader").css("display", "block");
+        $('.article-content').find(".loader").css("display", "block");
         viewFirstText = false;
       }
 
