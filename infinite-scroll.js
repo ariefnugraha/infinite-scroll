@@ -77,7 +77,6 @@ $(document).ready(function () {
   let articleParent = $(".mid_content .lc_col");
   let articleText = document.querySelector(".article_ct .text");
   let currentNews = 0;
-  let oldNews = 0;
   let currentPage = 1;
   let totalNews = listNews.length;
   let viewFirstText = true;
