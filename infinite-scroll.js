@@ -101,9 +101,6 @@ $(document).ready(function () {
   );
 
   $(window).scroll(function () {
-    // console.log(window.scrollY)
-    // console.log($('.article-content').eq(currentNews).offset().top + $('.article-content').eq(currentNews).height())
-   
     // console.log($('.article-content').eq(currentNews))
     let scrollTop = $(this).scrollTop();
     let articleTextOuterHeight =
@@ -130,13 +127,9 @@ $(document).ready(function () {
     //   viewFirstText = false;
     // }
 
-  
-
-    
     if (scrollTop < lastScroll) {
       let offsetTop = $(".article-content").eq(currentNews).offset().top;
 
-     
       if (scrollTop < offsetTop && currentNews > 0) {
         currentNews--;
         history.pushState(null, null, listNews[currentNews].url);
@@ -144,33 +137,13 @@ $(document).ready(function () {
         scrollFromTop = true;
       }
     } else if (scrollTop > lastScroll) {
-      if(scrollFromTop == true) {
-        console.log(document.querySelectorAll('.article-content')[currentNews].getBoundingClientRect().bottom)
+      console.log(scrollFromTop)
+      if (scrollFromTop) {
+        currentNews++;
+        history.pushState(null, null, listNews[currentNews].url);
+        document.title = listNews[currentNews].title;
+        scrollFromTop = false;
       }
-      // let loadNews = $('.article-content').eq(currentNews).find('.load_new_news');
-
-      // let elHeight = $(".article-content").eq(currentNews).height() - 900;
-      // let elHeightPlus = elHeight + 100;
-    
-      // console.log('el Height ' + elHeight);
-      // console.log('el plus' + elHeightPlus);
-      // console.log('scroll top: ' + scrollTop)
-      // if (
-      //   scrollTop > elHeight &&
-      //   scrollTop < elHeightPlus &&
-      //   scrollFromTop === true
-      // ) {
-        
-      //   currentNews++;
-      //   elHeight =
-      //     $(".article-content")
-      //       .eq(currentNews + 1)
-      //       .height() - 900;
-      //   elHeightPlus = elHeight + 100;
-      //   history.pushState(null, null, listNews[currentNews].url);
-      //   document.title = listNews[currentNews].title;
-      //   console.log(currentNews);
-      // }
 
       // LOAD TEKS ARTIKEL SELANJUTNYA
       if (
