@@ -101,6 +101,10 @@ $(document).ready(function () {
   );
 
   $(window).scroll(function () {
+    // console.log(window.scrollY)
+    // console.log($('.article-content').eq(currentNews).offset().top + $('.article-content').eq(currentNews).height())
+   
+    // console.log($('.article-content').eq(currentNews))
     let scrollTop = $(this).scrollTop();
     let articleTextOuterHeight =
       $(".article").eq(currentNews).find(".article_ct .text").outerHeight() +
@@ -126,11 +130,13 @@ $(document).ready(function () {
     //   viewFirstText = false;
     // }
 
-    // UBAH URL SESUAI DENGAN ARAH SCROLL
+  
 
+    
     if (scrollTop < lastScroll) {
-      let offsetTop = $(".article-content").eq(currentNews).offset().top - 1100;
+      let offsetTop = $(".article-content").eq(currentNews).offset().top;
 
+     
       if (scrollTop < offsetTop && currentNews > 0) {
         currentNews--;
         history.pushState(null, null, listNews[currentNews].url);
@@ -138,16 +144,17 @@ $(document).ready(function () {
         scrollFromTop = true;
       }
     } else if (scrollTop > lastScroll) {
-      let loadNews = $('.article-content').eq(currentNews).find('.load_new_news');
-
-      if(scrollFromTop === true && loadNews.css('display') === 'none') {
-        currentNews++;
-        console.log(currentNews)
+      if(scrollFromTop == true) {
+        console.log(document.querySelectorAll('.article-content')[currentNews].getBoundingClientRect().bottom)
       }
+      // let loadNews = $('.article-content').eq(currentNews).find('.load_new_news');
+
       // let elHeight = $(".article-content").eq(currentNews).height() - 900;
       // let elHeightPlus = elHeight + 100;
-      // // console.log("height: " + elHeight);
-
+    
+      // console.log('el Height ' + elHeight);
+      // console.log('el plus' + elHeightPlus);
+      // console.log('scroll top: ' + scrollTop)
       // if (
       //   scrollTop > elHeight &&
       //   scrollTop < elHeightPlus &&
